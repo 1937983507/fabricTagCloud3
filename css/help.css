@@ -1,0 +1,397 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    line-height: 1.5;
+    font-weight: 300;
+
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 头部============================================= */
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5%;
+    /* 调整高度，根据需要自行修改 */
+    box-shadow: 0 1px 4px rgba(224, 224, 224, .5);
+    z-index: 3;
+    border-bottom: 1px solid rgb(156, 156, 156);
+    font-size: 15px;
+}
+
+#content {
+    /* 添加一些额外的样式，防止被头部遮挡 */
+    margin-top: 60px;
+    /* 与头部高度相同 */
+    padding: 20px;
+    /* 为了美观，根据需要自行修改 */
+}
+
+#img-logo {
+    height: 70%;
+    padding: 5px 20px;
+    float: left;
+}
+
+#img-logo img {
+    height: 100%;
+}
+
+#header div {
+    display: inline;
+}
+
+#header button {
+    background: rgba(0, 0, 0, 0);
+    border-color: rgba(247, 5, 5, 0);
+    color: var(--el-color-info);
+    padding: 15px;
+    cursor: pointer;
+    font-size: 15px;
+    height: 100%;
+}
+
+#header button:hover {
+    background: rgb(202, 200, 200);
+}
+
+#header-right {
+    height: 100%;
+    line-height: 60px;
+    /* 调整与头部高度相同 */
+    padding: 0px 30px;
+    cursor: pointer;
+    float: right;
+}
+
+#header-right a {
+    padding: 15px;
+    cursor: pointer;
+}
+
+
+
+/* 主体部分===========================================================  */
+.container {
+    position: absolute;
+    display: inline-block;
+    background: #ffffff;
+    width: 85%;
+    top: 54px;
+    bottom: 10px;
+    right: 0;
+}
+
+/* 左右侧导航栏=========================================================== */
+.sidebar {
+    position: absolute;
+    display: block;
+    top: 0;
+    /* bottom: 0; */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #000000;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    color: #007bff;
+}
+
+
+#sidebar-left {
+    left: 0;
+    width: 200px;
+    padding: 40px;
+    font-size: 20px;
+    background-color: #ffffff;
+}
+
+#sidebar-left ul li {
+    margin-bottom: 10px;
+}
+
+#sidebar-left a {
+    font-size: 15px;
+    padding: 5px 0px 5px 15px;
+    border-radius: 10px;
+}
+
+#sidebar-right {
+    right: 23%;
+    width: 180px;
+    padding-top: 20px;
+}
+
+#sidebar-right a {
+    padding: 5px 0px 5px 10px;
+    border-left: 3px solid rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.sidebar ul ul {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+a.active {
+    font-weight: 700;
+    background-color: rgb(238, 243, 255);
+    color: rgb(26, 102, 255);
+}
+
+.page-title {
+    border-bottom: 1px solid rgb(215, 215, 215);
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+/* 右上部分反馈============================================ */
+.star_help {
+    width: 100%;
+    /* margin: 50px auto; */
+    text-align: center;
+    /* border: 1px solid #ccc; */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 28px;
+    background: rgb(251, 251, 251);
+    cursor: default;
+}
+
+.star_title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.star_tips {
+    font-size: 12px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stars {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stars input[type="radio"] {
+    display: none;
+}
+
+.stars label {
+    font-size: 26px;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+
+.star_feedback {
+    display: none;
+}
+
+.a_feedback_list {
+    background: rgb(242, 242, 242);
+    border: 1px solid rgb(242, 242, 242);
+    border-radius: 10px;
+    font-size: 12px;
+    text-align: left;
+    padding: 5px 0px 5px 15px;
+    margin-top: 10px;
+}
+
+.a_feedback_list.selected {
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.a_feedback_list:hover {
+    cursor: pointer;
+}
+
+.feedback_text {
+    margin-top: 5px;
+    min-width: 80%;
+    max-width: 80%;
+    width: 80%;
+    padding: 10px;
+}
+
+.feedback_xp_des {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.feedback_xp_ctrl button {
+    margin-top: 10px;
+    width: 40%;
+    cursor: pointer;
+}
+
+
+
+#create-ticket {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+
+
+
+/* 主要内容============================================= */
+.main-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 280px;
+    right: 0px;
+    background: #ffffff;
+    line-height: 35px;
+    overflow-y: auto;
+}
+
+.main-content-pages {
+    background: rgb(255, 255, 255);
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 90%;
+    overflow-y: auto;
+}
+
+/* 所有子页面 */
+.main-content-page {
+    padding-top: 30px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-right: 45%;
+    overflow-y: auto;
+}
+
+.main-content img {
+    width: 70%;
+}
+
+
+
+#getting-started1 div {
+    padding-left: 15px;
+    border-left: 1px solid #bfc2cf;
+    margin: 40px 0px 40px 40px;
+}
+
+#getting-started1 span {
+    display: inline-block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    line-height: 30px;
+    text-align: center;
+    left: 0px;
+    font-weight: 500;
+    font-size: 20px;
+    color: #252b48;
+    border: 2px solid #bfc2cf;
+}
+
+/* 脚部====================================================== */
+#footer {
+    display: inline-block;
+    position: absolute;
+    background: rgb(108, 108, 108);
+    width: 100%;
+    height: 10%;
+    z-index: 999;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: #ffffff;
+    border-top: 6px solid rgb(255, 255, 255);
+    line-height: 25px;
+}
+
+#footer-left ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#footer-left li {
+    padding: 0px 10px;
+}
+
+#footer-left a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#footer-left li>a:hover {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#footer-right {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* 左右分散对齐 */
+    align-items: center;
+    /* 垂直居中 */
+    margin-left: 50px;
+    position: relative;
+}
+
+#footer-right div {
+    height: 80%;
+    flex: 1;
+    /* 平分父容器的宽度 */
+    position: relative;
+    text-align: center;
+    display: flex;
+    /* 使用 Flexbox */
+    flex-direction: column;
+    /* 垂直方向布局 */
+    justify-content: center;
+    /* 上下居中 */
+}
+
+#footer-right span {
+    display: block;
+    color: rgb(182, 182, 182);
+    position: absolute;
+    top: -5px;
+}
+
+#footer-right img {
+    height: 60%;
+    padding-right: 20px;
+}

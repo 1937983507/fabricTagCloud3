@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地名标签云-意见反馈</title>
+    <link rel="stylesheet" type="text/css" href="../css/feedback.css">
+    <script src="../js/feedback.js"></script>
+
+    <!-- 引入Jquery -->
+    <script src="../js/modules/jquery.js"></script>
+    <!-- 上方按钮事件 -->
+    <script src="../js/initHead.js"></script>
+</head>
+
+<body>
+
+    <!-- 头部 -->
+    <div id="header">
+        <div id="img-logo">
+            <img src="../img/logo.png"></img>
+            <!-- <p>中心型标签云logo</p> -->
+        </div>
+
+        <div id="header-left">
+            <button type="button" id="homeBtn">首页</button>
+            <button type="button" id="fileBtn">文件</button>
+            <button type="button" id="saveFileBtn">保存</button>
+            <button type="button" id="uploadFileBtn">上传到云端</button>
+            <button type="button" id="shareTagCloudBtn">分享</button>
+            <button type="button" id="helpBtn">帮助</button>
+            <button type="button" id="feedbackBtn">意见反馈</button>
+            <button type="button" id="aboutusBtn">关于我们</button>
+        </div>
+
+        <div id="header-right">
+            <!-- <a> 下载到本地 </a> -->
+            <a id="LoginAndRegisterBtn">
+                <!-- <span> 登录/注册 </span> -->
+                <!-- <img src="../img/user.png" alt="" style="height: 80%; margin-top: 8px;"> -->
+            </a>
+        </div>
+
+    </div>
+
+    <!--<form action="/submit_feedback" method="post" enctype="multipart/form-data"  id="feedbackForm">-->
+    <form action="submit-feedback.php" method="post" enctype="multipart/form-data" id="feedbackForm">
+        <!-- <h1>意见反馈</h1> -->
+        <!-- <div>
+            <label for="email_input">邮箱地址：</label>
+            <input type="text" id="email_input" name="email_input" placeholder="请填写您的邮箱地址，用于信息反馈" required>
+        </div>
+        <div>
+            <label for="issue_type">工单类型：</label>
+            <div id="choose_issue_type">
+                <div id="issue_type_consultation_div">
+                    <input type="checkbox" id="issue_type_consultation" name="issue_type" value="功能咨询"
+                        onchange="updateCheckboxes(this)">
+                    <span for="issue_type_consultation">功能咨询（方法或接口使用咨询、功能建议等）</span>
+                </div>
+                <div id="issue_type_feedback_div">
+                    <input type="checkbox" id="issue_type_feedback" name="issue_type" value="问题反馈"
+                        onchange="updateCheckboxes(this)">
+                    <span for="issue_type_feedback">问题反馈（错误反馈、数据错误、服务超时等）</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="issue_title">工单标题：</label>
+            <input type="text" id="issue_title" name="issue_title" placeholder="请填写工单标题" required>
+        </div>
+        <div>
+            <label for="issue_description">工单描述：</label>
+            <textarea id="issue_description" name="issue_description" rows="8" cols="50"
+                placeholder="请详细描述您遇到的问题，如有错误日志等信息也请提供" required></textarea>
+        </div>
+        <div>
+            <label for="error_message">报错信息：</label>
+            <input type="text" id="error_message" name="error_message" placeholder="使用chrome浏览器，按下F12，看是否有报错信息，请截图"
+                required>
+        </div>
+        <div id="file_display">
+            <input type="file" id="file_upload" name="file_upload" accept=".png,.gif,.jpg,.jpeg,.zip"
+                style="display: none;" onchange="displayFileFun()">
+            <button type="button" onclick="document.getElementById('file_upload').click()" id="file_uploadBtn"> + </button>
+            <div style="display: none;" id="preview_deleteImg">
+                <img src="../img/previewImg.png" alt="" id="previewImg" onclick="previewImgFun()">
+                <img src="../img/deleteImg.png" alt="" id="deleteImg" onclick="deleteImgFun()">
+            </div>
+            <img src="" alt="" style="display: none;" id="showImg">
+        </div>
+        <div style="margin-left: 20%; font-size: 12px;">
+            可接受的格式：jpg、jpeg、png、gif，图片大小不超过5M
+        </div>
+        <div>
+            <input type="submit" value="取消" id="cancelSubmitBtn">
+            <input type="submit" value="提交" id="submitBtn">
+        </div> -->
+        <div style="display: block; text-align: center; line-height: 40px;">
+            <div style="text-align: left; font-size: 25px; font-weight: 1000;">客服联系方式：</div>
+            <div style="">
+                <div style="text-align: left; font-size: 18px; margin-left: 15px;">联系方法一：客服微信号(13859211947)</div>
+                <img src="../img/vx.png" alt="" style="height: 200px;">
+            </div>
+            <div>
+                <div style="text-align: left; font-size: 18px; margin-left: 15px;">联系方式二：客服邮箱1937983507@qq.com</div>
+            </div>
+            <div style="margin-top: 25px;">
+                后台将在24小时内给予答复，感谢您的使用。
+            </div>
+        </div>
+    </form>
+
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="document.getElementById('myModal').style.display = 'none'">&times;</span>
+        <div class="modal-content">
+            <img id="modalImg">
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer">
+        <div id="footer-left">
+            <ul>
+                <li style="border-right: 1px solid rgb(255, 255, 255); padding-left: 0;"><a href="index.html"
+                        id="homeBtn">首页</a></li>
+                <li style="border-right: 1px solid rgb(255, 255, 255);"><a href="help.html" id="helpBtn">帮助</a></li>
+                <li style="border-right: 1px solid rgb(255, 255, 255);"><a href="feedback.html"
+                        id="feedbackBtn">意见反馈</a></li>
+                <li><a href="hubuCartographicGroup.html" id="aboutusBtn">关于我们</a></li>
+            </ul>
+            <div>
+                <span>Copyright © 2024 地名标签云 hubutagcloud.cn All Rights Reserved. 备案号:</span>
+                <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2024043287号-1</a>
+            </div>
+            <div>建议您使用Edge、Chrome 80+、FireFox 86+等主流浏览器浏览本网站</div>
+        </div>
+        <div id="footer-right">
+            <div>
+                <span>首页二维码</span>
+                <img src="../img/QRcode.png" alt="">
+            </div>
+            <div>
+                <span>客服微信号</span>
+                <img src="../img/vx.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        initFeedback();
+
+    </script>
+</body>
+
+</html>

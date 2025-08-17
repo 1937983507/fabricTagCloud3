@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>湖北大学制图组</title>
+    <link rel="stylesheet" type="text/css" href="../css/hubuCartographicGroup.css">
+    <script src="../js/hubuCartographicGroup.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div id="logo">
+            <img src="../img/hubu-logo.png" alt="">
+        </div>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">首页</a></li>
+            <li><a href="#" onclick="showPage('projects')">科研项目</a></li>
+            <li><a href="#" onclick="showPage('papers')">学术论文</a></li>
+            <li><a href="#" onclick="showPage('softwriting&patent')">软著专利</a></li>
+            <li><a href="#" onclick="showPage('honour')">获奖荣誉</a></li>
+            <li><a href="#" onclick="showPage('cooperationTeam')">合作团队</a></li>
+            <li><a href="#" onclick="showPage('studentTeam')">学生团队</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <!-- 左侧内容 -->
+        <div class="container-left">
+            <div id="showCheng">
+                <img src="../img/chengxiaoqiang.png" alt="">
+                <div><b>成晓强</b></div>
+            </div>
+            <div id="showInfo">
+                <div id="showInfo-title">
+                    <div>基本信息</div>
+                    <div>Personal Information</div>
+                </div>
+                <div id="showInfo-contain">
+                    <p>副教授 硕士生导师</p>
+                    <p>性别 : 男</p>
+                    <p>毕业院校 : 武汉大学</p>
+                    <p>学历 : 博士研究生</p>
+                    <p>学位 : 工学博士学位</p>
+                    <p>在职信息 : 在职</p>
+                    <p>所在单位 : 湖北大学资源环境学院</p>
+                    <p>办公地点 : 武汉市武昌区友谊大道368号湖北大学资源环境学院</p>
+                    <p>联系方式 : +86 18627858631</p>
+                    <p>Email : carto@hubu.edu.cn</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧内容 -->
+        <div class="container-right">
+
+
+            <!-- 首页 -->
+            <div id="home" class="page">
+                <!-- 实验室简介 -->
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/labIntroduction.png" alt="">
+                        <span class="section-title-left">实验室简介</span>
+                    </div>
+                    <div class="section-p">
+                        团队围绕一个专业热点方向——时空大数据可视化、一个专业新兴方向——泛地图学理论与方法（隐喻地图、新型地图可视化）开展研究。欢迎地理学、资源与环境、计算机科学与技术等相关专业的本科、研究生加入团队研究学习！
+                    </div>
+                </div>
+                <!-- 导师简介 -->
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/mentor.png" alt="">
+                        <span class="section-title-left">导师简介</span>
+                    </div>
+                    <div class="section-p">
+                        成晓强，男，湖北大学资源环境学院副教授，博士毕业于武汉大学信息学部资源与环境科学学院，研究方向为时空可视化、地理大数据精简表达、人工智能辅助下的新媒体地图制图等。
+                        目前在International journal of geographical information science、ISPRS International Journal of
+                        Geo-Information、Cartography and Geographic Information
+                        Science、地球信息科学学报、测绘学报等期刊发表论文二十余篇，其中一作或通讯十余篇，
+                        参与开放基金、国家自然科学基金重大项目多项。
+                    </div>
+                </div>
+                <!-- 科研项目 -->
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/projects.png" alt="">
+                        <span class="section-title-left">科研项目</span>
+                        <span class="section-title-right" onclick="showPage('projects')"> more > </span>
+                    </div>
+                    <div class="section-p">
+                        <div class="section-part">
+                            <div class="project-title">面向地理环境认知的兴趣点语义标签可视化方法研究</div>
+                            <div>自然资源部城市国土资源监测与仿真重点实验室，开放基金</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">基于最大似然直线匹配的遥感影像配准方法研究</div>
+                            <pdiv>国家自然科学基金委员会, 青年科学基金项目, 41801274, 2019-01-01至2021-12-31，25万元</pdiv>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">基于地理词云的位置大数据可视分析</div>
+                            <div>测绘遥感信息工程国家重点实验室实验室，开放基金项目，2020-2021</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">基于天空地协同观测的精准农情监测技术研发与示范</div>
+                            <div>湖北省技术创新专项，2018-2020</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">支持精简表达与实时交互的巡天观测数据可视分析方法研究</div>
+                            <div>中国科学院空间应用工程与技术中心开放基金，2017-2019</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">基于视觉认知的网络混搭地图易读性评价与优化方法研究</div>
+                            <div>国家自然科学基金青年基金，41501443，2016/01-2018/12，20万元，已结题，主持</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">支持质量约束的地理信息资源在线搜索关键技术研究</div>
+                            <div>国家自然科学基金面上项目，41371372，2014/01-2017/12，80万元，已结题，参与</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">大规模复杂地理空间数据可视化与自适应制图技术研究</div>
+                            <div>国家863项目，SS2012AA120704，2012/01-2014/12，450万元，已结题，参与</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">适宜终端用户操作的在线式地图综合技术</div>
+                            <div>国家863项目，2007AA12Z209，2007/01-2009/12，80万元，已结题</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 学术论文 -->
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/papers.png" alt="">
+                        <span class="section-title-left">学术论文</span>
+                        <span class="section-title-right" onclick="showPage('papers')"> more > </span>
+                    </div>
+                    <div class="section-p">
+                        <div class="section-part">
+                            <a href="">以用户地理位置为中心的兴趣点标签云</a>
+                            <div><b>成晓强</b>, 刘仲宇, 吴华意, 唐岭军</div>
+                            <div>地球信息科学学报, 2024, 1-14</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">Lbs tag cloud: a centralized tag cloud for visualization of points of interest in
+                                location-based services</a>
+                            <div><b>Cheng Xiaoqiang</b>; Liu Zhongyu; Wu Huayi; Xiao Haibo</div>
+                            <div>ISPRS International Journal of Geo-Information,2023, 12(9)</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">Mslf: multi-scale legibility function to estimate the legible scale of individual
+                                line features</a>
+                            <div><b>Cheng Xiaoqiang</b>; Liu Zhongyu; Zhang Qian</div>
+                            <div>Cartography and Geographic Information Science,2021, 48(2): 151-168</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">国土资源调查数据地图综合狭长图斑的中剖分处理</a>
+                            <div>徐海江; <b>成晓强</b>; 艾廷华</div>
+                            <div>北京测绘,2021, 35(03): 358-363</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">矢量曲线的视觉清晰度及在网络地图综合中的应用</a>
+                            <div>安晓亚; <b>成晓强</b></div>
+                            <div>测绘学报,2020, 49(02): 245-255</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">居民地变化的空间分布及社会经济驱动力分析——以浙江省为例</a>
+                            <div>周衡; 陈张建; 李爱勤; <b>成晓强</b>; 吴华意</div>
+                            <div>数据分析与知识发现,2020, 4(09): 81-90</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">A quad-tree-based fast and adaptive kernel density estimation algorithm for
+                                heat-map generation</a>
+                            <div>Yuan Kunxiaojia; <b>Cheng Xiaoqiang</b>; Gui Zhipeng; Li Fa; Wu Huayi</div>
+                            <div>International journal of geographical information science : IJGIS,2019, 33(12):
+                                2455-2476</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">多核学习与用户反馈结合的wms图层检索方法</a>
+                            <div>李牧闲; 桂志鹏; <b>成晓强</b>; 吴华意; 秦昆</div>
+                            <div>测绘学报,2019,48(10):1320-1330</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 软著专利 -->
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/softwriting&patent.png" alt="">
+                        <span class="section-title-left">软著专利</span>
+                        <span class="section-title-right" onclick="showPage('softwriting&patent')"> more > </span>
+                    </div>
+                    <div class="section-p">
+                        <div class="section-part">
+                            <div class="project-title">一种尺度相关的异质性线要素自动分段方法及系统</div>
+                            <div><b>成晓强</b>、刘娜，2023-12-12，中国，ZL 2023 11221032.X（专利）</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">一种顾及空间密度差异的热力图生成方法及系统</div>
+                            <div><b>成晓强</b>、刘仲宇、袁昆筱佳、郭昌雄、吴华意，2022-8-2, 中国, ZL202011488154.1（专利）</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">一种矢量地图在线式综合服务方法及其系统</div>
+                            <div>艾廷华、<b>成晓强</b>、张翔、李精忠、周启，2013-9-1, 中国, CN201210027976.9（专利）</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">兴趣点标签云定制系统 V1.0</div>
+                            <div><b>成晓强</b>、柯张镭、赵家威、李嘉瑞、付雅梦、甘佳欣、周乐，2024-3-5 2024SR0354686（软著）</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 获奖荣誉 -->
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/honour.png" alt="">
+                        <span class="section-title-left">获奖荣誉</span>
+                        <span class="section-title-right" onclick="showPage('honour')"> more > </span>
+                    </div>
+                    <div class="section-p">
+                        <div class="section-part">
+                            <div>湖北大学研究生教学成果特等奖，湖北大学，2022</div>
+                        </div>
+                        <div class="section-part">
+                            <div>第十二届全国大学生GIS应用技能大赛一等奖，优秀指导教师，2023</div>
+
+                        </div>
+                        <div class="section-part">
+                            <div>第十一届全国大学生GIS应用技能大赛二等奖，2022</div>
+                        </div>
+                        <div class="section-part">
+                            <div>第十届全国大学生GIS应用技能大赛二等奖，2021</div>
+                        </div>
+                        <div class="section-part">
+                            <div>第八届全国大学生GIS应用技能大赛一等奖，优秀指导教师，2019</div>
+                        </div>
+                        <div class="section-part">
+                            <div>
+                                成晓强（2/10），土地利用专题地图综合软件及其在“二调”多级数据库建设中的应用，中国测绘学会，测绘科技进步奖，二等奖，2014（艾廷华；<b>成晓强</b>；李精忠；张翔;；杨敏；田晶；禹文豪；高峰；周梦杰；何亚坤）（科研奖励）
+                            </div>
+                        </div>
+                        <div class="section-part">
+                            <div>
+                                成晓强(12/12)，面向智慧城市的时空基础设施建设关键技术及应用，中国地理信息产业协会，科技进步，省部二等奖，2022（向隆刚；赵伟伟；邓晓红；尹向军；王守东；任朝阳；周良才；姜丹萍；诸敏秋；张俊磊；樊迪；<b>成晓强</b>）（科研奖励）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 科研项目 -->
+            <div id="projects" class="page">
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/projects.png" alt="">
+                        <span class="section-title-left">科研项目</span>
+                    </div>
+                    <div class="section-p">
+                        <div class="section-part">
+                            <div class="project-title">面向地理环境认知的兴趣点语义标签可视化方法研究</div>
+                            <div>自然资源部城市国土资源监测与仿真重点实验室，开放基金</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">基于最大似然直线匹配的遥感影像配准方法研究</div>
+                            <pdiv>国家自然科学基金委员会, 青年科学基金项目, 41801274, 2019-01-01至2021-12-31，25万元</pdiv>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">基于地理词云的位置大数据可视分析</div>
+                            <div>测绘遥感信息工程国家重点实验室实验室，开放基金项目，2020-2021</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">基于天空地协同观测的精准农情监测技术研发与示范</div>
+                            <div>湖北省技术创新专项，2018-2020</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">支持精简表达与实时交互的巡天观测数据可视分析方法研究</div>
+                            <div>中国科学院空间应用工程与技术中心开放基金，2017-2019</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">基于视觉认知的网络混搭地图易读性评价与优化方法研究</div>
+                            <div>国家自然科学基金青年基金，41501443，2016/01-2018/12，20万元，已结题，主持</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">支持质量约束的地理信息资源在线搜索关键技术研究</div>
+                            <div>国家自然科学基金面上项目，41371372，2014/01-2017/12，80万元，已结题，参与</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">大规模复杂地理空间数据可视化与自适应制图技术研究</div>
+                            <div>国家863项目，SS2012AA120704，2012/01-2014/12，450万元，已结题，参与</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">适宜终端用户操作的在线式地图综合技术</div>
+                            <div>国家863项目，2007AA12Z209，2007/01-2009/12，80万元，已结题</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- 学术论文 -->
+            <div id="papers" class="page">
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/papers.png" alt="">
+                        <span class="section-title-left">学术论文</span>
+                    </div>
+                    <div class="section-p">
+                        <div class="section-part">
+                            <a href="">以用户地理位置为中心的兴趣点标签云</a>
+                            <div><b>成晓强</b>, 刘仲宇, 吴华意, 唐岭军</div>
+                            <div>地球信息科学学报, 2024, 1-14</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">Lbs tag cloud: a centralized tag cloud for visualization of points of interest in
+                                location-based services</a>
+                            <div><b>Cheng Xiaoqiang</b>; Liu Zhongyu; Wu Huayi; Xiao Haibo</div>
+                            <div>ISPRS International Journal of Geo-Information,2023, 12(9)</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">Mslf: multi-scale legibility function to estimate the legible scale of individual
+                                line features</a>
+                            <div><b>Cheng Xiaoqiang</b>; Liu Zhongyu; Zhang Qian</div>
+                            <div>Cartography and Geographic Information Science,2021, 48(2): 151-168</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">国土资源调查数据地图综合狭长图斑的中剖分处理</a>
+                            <div>徐海江; <b>成晓强</b>; 艾廷华</div>
+                            <div>北京测绘,2021, 35(03): 358-363</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">矢量曲线的视觉清晰度及在网络地图综合中的应用</a>
+                            <div>安晓亚; <b>成晓强</b></div>
+                            <div>测绘学报,2020, 49(02): 245-255</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">居民地变化的空间分布及社会经济驱动力分析——以浙江省为例</a>
+                            <div>周衡; 陈张建; 李爱勤; <b>成晓强</b>; 吴华意</div>
+                            <div>数据分析与知识发现,2020, 4(09): 81-90</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">A quad-tree-based fast and adaptive kernel density estimation algorithm for
+                                heat-map generation</a>
+                            <div>Yuan Kunxiaojia; <b>Cheng Xiaoqiang</b>; Gui Zhipeng; Li Fa; Wu Huayi</div>
+                            <div>International journal of geographical information science : IJGIS,2019, 33(12):
+                                2455-2476</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">几何刚性和法向量采样一致性的点云配准算法</a>
+                            <div>张谦, 李梦瑶, <b>成晓强</b></div>
+                            <div>测绘科学, 2019,44(01): 112-117</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">基于夜间灯光亮度的OpenStreetMap数据完整性检验</a>
+                            <div>刘菲, <b>成晓强*</b>, 吴华意</div>
+                            <div>数据分析与知识发现, 2019,3(09): 36-44</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">多核学习与用户反馈结合的WMS图层检索方法</a>
+                            <div>李牧闲; 桂志鹏; <b>成晓强</b>; 吴华意; 秦昆</div>
+                            <div>测绘学报,2019,48(10):1320-1330</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">一种WMS领域主题文本提取及元数据扩展方法</a>
+                            <div>张敏, 桂志鹏, <b>成晓强</b>, 等</div>
+                            <div>武汉大学学报(信息科学版), 2019,44(11): 1730-1738</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">Detail Resolution: A New Model to Describe Level of Detail Information of Vector Line Data</a>
+                            <div><b>Cheng Xiaoqiang</b>, Wu Huayi, Ai Tinghua, et al.</div>
+                            <div>Zhou, C., Su, F., Harvey, F., Xu, J. (eds) Spatial Data Handling in Big Data Era. Advances in Geographic Information Science. Springer, Singapore.</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">信息量与相似度约束下的网络地图服务缩略图自动生成算法</a>
+                            <div><b>成晓强*</b>, 杨敏, 桂志鹏, 等</div>
+                            <div>测绘学报, 2017(11): 1891-1898</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">Content-Based Discovery for Web Map Service using Support Vector Machine and User Relevance Feedback</a>
+                            <div>HU K, GUI Z, <b>CHENG X</b>, et al</div>
+                            <div>PLOS ONE, 2016,11(11): e166098.</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">A CLOUD-BASED PLATFORM SUPPORTING GEOSPATIAL COLLABORATION FOR GIS EDUCATION: ISPRS Workshop of Commission VI 1-3, Advances in Web-based Education Services</a>
+                            <div><b>CHENG X</b>, GUI Z, HUA K, et al</div>
+                            <div>Berlin, Germany, 2015</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">一种决策驱动的地图综合服务语义增强方法</a>
+                            <div><b>成晓强*</b>, 艾廷华, 杨敏</div>
+                            <div>武汉大学学报(信息科学版), 2014(05): 561-565</div>
+                        </div>
+                        <div class="section-part">
+                            <a href="">A shape analysis and template matching of building features by the Fourier transform method</a>
+                            <div>AI T, <b>CHENG X</b>, LIU P, et al</div>
+                            <div>Computers, Environment and Urban Systems, 2013,41(0): 219-233</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 软著专利 -->
+            <div id="softwriting&patent" class="page">
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/softwriting&patent.png" alt="">
+                        <span class="section-title-left">软著专利</span>
+                    </div>
+                    <div class="section-p">
+                        <div class="section-part">
+                            <div class="project-title">一种尺度相关的异质性线要素自动分段方法及系统</div>
+                            <div><b>成晓强</b>、刘娜，2023-12-12，中国，ZL 2023 11221032.X（专利）</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">一种顾及空间密度差异的热力图生成方法及系统</div>
+                            <div><b>成晓强</b>、刘仲宇、袁昆筱佳、郭昌雄、吴华意，2022-8-2, 中国, ZL202011488154.1（专利）</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">一种矢量地图在线式综合服务方法及其系统</div>
+                            <div>艾廷华、<b>成晓强</b>、张翔、李精忠、周启，2013-9-1, 中国, CN201210027976.9（专利）</div>
+                        </div>
+                        <div class="section-part">
+                            <div class="project-title">兴趣点标签云定制系统 V1.0</div>
+                            <div><b>成晓强</b>、柯张镭、赵家威、李嘉瑞、付雅梦、甘佳欣、周乐，2024-3-5 2024SR0354686（软著）</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- 获奖荣誉 -->
+            <div id="honour" class="page">
+                <div class="page-section">
+                    <div class="section-title">
+                        <img src="../img/honour.png" alt="">
+                        <span class="section-title-left">获奖荣誉</span>
+                    </div>
+                    <div class="section-p">
+                        <div class="section-part">
+                            <div>湖北大学研究生教学成果特等奖，湖北大学，2022</div>
+                        </div>
+                        <div class="section-part">
+                            <div>第十二届全国大学生GIS应用技能大赛一等奖，优秀指导教师，2023</div>
+
+                        </div>
+                        <div class="section-part">
+                            <div>第十一届全国大学生GIS应用技能大赛二等奖，2022</div>
+                        </div>
+                        <div class="section-part">
+                            <div>第十届全国大学生GIS应用技能大赛二等奖，2021</div>
+                        </div>
+                        <div class="section-part">
+                            <div>第八届全国大学生GIS应用技能大赛一等奖，优秀指导教师，2019</div>
+                        </div>
+                        <div class="section-part">
+                            <div>
+                                成晓强（2/10），土地利用专题地图综合软件及其在“二调”多级数据库建设中的应用，中国测绘学会，测绘科技进步奖，二等奖，2014（艾廷华；<b>成晓强</b>；李精忠；张翔;；杨敏；田晶；禹文豪；高峰；周梦杰；何亚坤）（科研奖励）
+                            </div>
+                        </div>
+                        <div class="section-part">
+                            <div>
+                                成晓强(12/12)，面向智慧城市的时空基础设施建设关键技术及应用，中国地理信息产业协会，科技进步，省部二等奖，2022（向隆刚；赵伟伟；邓晓红；尹向军；王守东；任朝阳；周良才；姜丹萍；诸敏秋；张俊磊；樊迪；<b>成晓强</b>）（科研奖励）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- 返回顶端 -->
+            <div id="back_top_wrap">
+                <button onclick="scrollToTop()">&uarr;</button>
+            </div>
+        </div>
+
+
+
+
+
+        <script>
+
+
+        </script>
+
+</body>
+
+</html>

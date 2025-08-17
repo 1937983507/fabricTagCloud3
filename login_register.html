@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地名标签云-登录/注册</title>
+    <link rel="stylesheet" type="text/css" href="../css/login_styles.css">
+    <script src="../js/login_register.js"></script>
+
+    <!-- 上方按钮事件 -->
+    <script src="../js/initHead.js"></script>
+</head>
+
+<body>
+
+    <!-- 头部 -->
+    <div id="header">
+        <div id="img-logo">
+            <img src="../img/logo.png"></img>
+            <!-- <p>中心型标签云logo</p> -->
+        </div>
+
+        <div id="header-left">
+            <button type="button" id="homeBtn">首页</button>
+            <button type="button" id="fileBtn">文件</button>
+            <button type="button" id="saveFileBtn">保存</button>
+            <button type="button" id="uploadFileBtn">上传到云端</button>
+            <button type="button" id="shareTagCloudBtn">分享</button>
+            <button type="button" id="helpBtn">帮助</button>
+            <button type="button" id="feedbackBtn">意见反馈</button>
+            <button type="button" id="aboutusBtn">关于我们</button>
+        </div>
+
+        <div id="header-right">
+            <!-- <a> 下载到本地 </a> -->
+            <a id="LoginAndRegisterBtn">
+                <span> 登录/注册 </span>
+                <!-- <img src="../img/user.png" alt="" style="height: 80%; margin-top: 8px;"> -->
+            </a>
+        </div>
+
+    </div>
+
+    <!-- 登录 -->
+    <div class="container" id="login-container">
+        <h2>登录</h2>
+        <form id="loginForm">
+            <input type="text" id="loginUsername" placeholder="用户名" required><br>
+            <div class="password-toggle">
+                <input type="password" id="loginPassword" placeholder="密码" required>
+                <button id="loginPasswordToggle" type="button"><img src="../img/eye-close.png" alt="Close Eye"></button>
+            </div>
+            <input type="submit" value="登录">
+        </form>
+        <p id="registerLink" class="toggle-link">还没有账号？点击这里注册</p>
+    </div>
+
+    <!-- 注册 -->
+    <div class="container" id="register-container">
+        <h2>注册</h2>
+        <form id="registerForm">
+            <input type="text" id="registerUsername" placeholder="用户名" required><br>
+            <input type="email" id="registerEmail" placeholder="邮箱" required><br>
+            <input type="tel" id="registerPhone" placeholder="手机号" required><br>
+            <div class="password-toggle">
+                <input type="password" id="registerPassword" placeholder="密码" required>
+                <button id="registerPasswordToggle" type="button"><img src="../img/eye-close.png"
+                        alt="Close Eye"></button>
+            </div>
+            <div class="password-toggle">
+                <input type="password" id="confirmPassword" placeholder="确认密码" required><br>
+                <button id="confirmPasswordToggle" type="button"><img src="../img/eye-close.png"
+                        alt="Close Eye"></button>
+            </div>
+            <input type="submit" value="注册">
+        </form>
+        <p id="loginLink" class="toggle-link">已有账号？点击这里登录</p>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer">
+        <div id="footer-left">
+            <ul>
+                <li style="border-right: 1px solid rgb(255, 255, 255); padding-left: 0;"><a href="index.html"
+                        id="homeBtn">首页</a></li>
+                <li style="border-right: 1px solid rgb(255, 255, 255);"><a href="help.html" id="helpBtn">帮助</a></li>
+                <li style="border-right: 1px solid rgb(255, 255, 255);"><a href="feedback.html"
+                        id="feedbackBtn">意见反馈</a></li>
+                <li><a href="hubuCartographicGroup.html" id="aboutusBtn">关于我们</a></li>
+            </ul>
+            <div>
+                <span>Copyright © 2024 地名标签云 hubutagcloud.cn All Rights Reserved. 备案号:</span>
+                <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2024043287号-1</a>
+            </div>
+            <div>建议您使用Edge、Chrome 80+、FireFox 86+等主流浏览器浏览本网站</div>
+        </div>
+        <div id="footer-right">
+            <div>
+                <span>首页二维码</span>
+                <img src="../img/QRcode.png" alt="">
+            </div>
+            <div>
+                <span>客服微信号</span>
+                <img src="../img/vx.png" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        initLoginRegister();
+
+    </script>
+</body>
+
+</html>

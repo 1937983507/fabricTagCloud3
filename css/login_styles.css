@@ -1,0 +1,219 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    line-height: 1.5;
+    font-weight: 300;
+
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 54px;
+    /* 调整高度，根据需要自行修改 */
+    box-shadow: 0 1px 4px rgba(224, 224, 224, .5);
+    z-index: 3;
+    border-bottom: 1px solid rgb(156, 156, 156);
+    font-size: 15px;
+}
+
+#content {
+    /* 添加一些额外的样式，防止被头部遮挡 */
+    margin-top: 60px;
+    /* 与头部高度相同 */
+    padding: 20px;
+    /* 为了美观，根据需要自行修改 */
+}
+
+#img-logo {
+    height: 100%;
+    padding: 5px 20px;
+    float: left;
+}
+
+#img-logo img {
+    height: 40px;
+}
+
+#header div {
+    display: inline;
+}
+
+#header button {
+    background: rgba(0, 0, 0, 0);
+    border-color: rgba(247, 5, 5, 0);
+    color: var(--el-color-info);
+    padding: 15px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#header button:hover {
+    background: rgb(202, 200, 200);
+}
+
+#header-right {
+    height: 100%;
+    line-height: 60px;
+    /* 调整与头部高度相同 */
+    padding: 0px 30px;
+    cursor: pointer;
+    float: right;
+}
+
+#header-right a {
+    padding: 15px;
+    cursor: pointer;
+}
+
+/* ====================================================================== */
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    text-align: center;
+}
+
+form {
+    margin-top: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="submit"] {
+    margin: 8px 0;
+    padding: 10px;
+    width: calc(100% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.password-toggle {
+    position: relative;
+}
+
+.password-toggle button {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.password-toggle button img {
+    margin-right: 12px;
+    width: 20px;
+    height: auto;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#register-container {
+    display: none;
+}
+
+.toggle-link {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: underline;
+    margin-top: 10px;
+    display: block;
+}
+
+
+/* 脚部====================================================== */
+#footer {
+    display: inline-block;
+    position: absolute;
+    background: rgb(108, 108, 108);
+    width: 100%;
+    height: 10%;
+    z-index: 999;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: #ffffff;
+    border-top: 6px solid rgb(255, 255, 255);
+    line-height: 25px;
+}
+
+#footer-left ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#footer-left li {
+    padding: 0px 10px;
+}
+
+#footer-left a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#footer-left li>a:hover{
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#footer-right {
+    height: 100%;
+    display: flex;
+    justify-content: space-between; /* 左右分散对齐 */
+    align-items: center; /* 垂直居中 */
+    margin-left: 50px;
+    position: relative;
+}
+
+#footer-right div {
+    height: 80%;
+    flex: 1; /* 平分父容器的宽度 */
+    position: relative;
+    text-align: center;
+    display: flex; /* 使用 Flexbox */
+    flex-direction: column; /* 垂直方向布局 */
+    justify-content: center; /* 上下居中 */
+}
+
+#footer-right span {
+    display: block;
+    color: rgb(182, 182, 182);
+    position: absolute;
+    top: -5px;
+}
+
+#footer-right img {
+    height: 60%;
+    padding-right: 20px;
+}

@@ -1,0 +1,704 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <title> 地名标签云 </title>
+    <meta charset="UTF-8">
+
+    <!-- 高德地图样式 -->
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: 'a45b8fdd549065da27a9395c8d5d87bd',
+        }
+    </script>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=2.0&key=80838eddfb922202b289fd1ad6fa4e58&plugin=AMap.MouseTool,AMap.CircleEditor,AMap.RectangleEditor,AMap.EllipseEditor,AMap.PolygonEditor,AMap.Driving,AMap.Scale,AMap.MapType,AMap.ToolBar,AMap.ControlBar,AMap.HeatMap,AMap.PlaceSearch,AMap.AutoComplete"></script>
+    <script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
+
+    <!-- 引入样式表 -->
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+
+    <!-- 引入Jquery -->
+    <script src="../js/modules/jquery.js"></script>
+    <!-- 引入fabric -->
+    <script src="../js/modules/fabric.js"></script>
+
+    <!-- 窗体切换与拖拽 -->
+    <script src="../js/changeWindows.js"></script>
+    <!-- 表格相关修改 -->
+    <script src="../js/changeTable.js"></script>
+    <!-- 字体相关修改 -->
+    <script src="../js/changeFont.js"></script>
+    <!-- 色带相关修改 -->
+    <script src="../js/changeColor.js"></script>
+    <!-- 数据导入部分 -->
+    <script src="../js/importData.js"></script>
+    <!-- 上方按钮事件 -->
+    <script src="../js/initHead.js"></script>
+
+    <!-- 在左窗口显示高德地图 -->
+    <script src="../js/initAMAP.js"></script>
+    <!-- 获取POI数据 -->
+    <script src="../js/getPOIs.js"></script>
+    <!-- 绘制标签云 -->
+    <script src="../js/initTagCloud.js"></script>
+    <!-- 要素详情界面交互 -->
+    <script src="../js/showDetailsWindow.js"></script>
+    <!-- 单击添加排名或通行时间 -->
+    <script src="../js/addRankTime.js"></script>
+    <!-- 参考尺度变换的标签云绘制 -->
+    <script src="../js/amplifyreduceTagCloud.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js/minified/introjs.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/intro.js/minified/intro.min.js"></script>
+
+</head>
+
+
+<body>
+    <!-- 最上面的head -->
+    <div id="header">
+        <div id="img-logo">
+            <img src="../img/logo.png"></img>
+            <!-- <p>中心型标签云logo</p> -->
+        </div>
+
+        <div id="header-left">
+            <button type="button" id="homeBtn">首页</button>
+            <button type="button" id="fileBtn">文件</button>
+            <button type="button" id="saveFileBtn">保存</button>
+            <button type="button" id="uploadFileBtn">上传到云端</button>
+            <button type="button" id="shareTagCloudBtn">分享</button>
+            <button type="button" id="helpBtn">帮助</button>
+            <button type="button" id="feedbackBtn">意见反馈</button>
+            <button type="button" id="aboutusBtn">关于我们</button>
+        </div>
+
+        <div id="header-right">
+            <!-- <a> 下载到本地 </a> -->
+            <a id="LoginAndRegisterBtn">
+                <!-- <span> 登录/注册 </span> -->
+                <!-- <img src="../img/user.png" alt="" style="height: 80%; margin-top: 8px;"> -->
+            </a>
+        </div>
+
+    </div>
+
+    <!-- 左侧栏目 -->
+    <div id="left-menu">
+        <div id="left-top-menu">
+            <div class="left-menu-item" id="intoContent"
+                style="background: rgb(241, 243, 247); border-left: 5px solid rgb(57, 156, 279);">
+                <img src="../img/content.png"></img>
+                <span>内容</span>
+            </div>
+            <div class="left-menu-item" id="intoTypeface">
+                <img src="../img/typeface.png"></img>
+                <span>字体</span>
+            </div>
+            <div class="left-menu-item" id="intoColor">
+                <img src="../img/color.png"></img>
+                <span>配色</span>
+            </div>
+        </div>
+        <div id="left-bottom-menu">
+            <a class="left-menu-item">快捷键</a>
+            <a class="left-menu-item">帮助</a>
+            <a class="left-menu-item">隐藏</a>
+        </div>
+    </div>
+
+
+    <!-- 中侧详情栏 -->
+    <div id="mid-box">
+
+        <!-- 地图+表格 -->
+        <div class="mid-box" id="content-box">
+            <!-- 地图 -->
+            <div id="mid-map">
+                <div id="map-head">
+                    <div class="dropdown" id="mapTypeDropdown">
+                        <div id="mapTypeToggle">地图切换</div>
+                        <div class="dropdownContent" id="mapTypeContent">
+                            <div class="dropdown-item" onclick="changeMapType('normal')">普通地图</div>
+                            <div class="dropdown-item" onclick="changeMapType('satellite')">卫星地图</div>
+                            <div class="dropdown-item" onclick="changeMapType('roadnet')">路网地图</div>
+                            <div class="dropdown-item" onclick="changeMapType('traffic')">交通地图</div>
+                        </div>
+                    </div>
+                    <div id="searchPosBtn">检索定位</div>
+                    <div class="dropdown" id="drawToFilterData">
+                        <div id="dropdownToggle">数据筛选</div>
+                        <div class="dropdownContent" id="datafilterContent">
+                            <div class="dropdown-item" onclick="selectItem('drawCircle')" id="drawCircleBtn">绘制圆形范围
+                            </div>
+                            <div class="dropdown-item" onclick="selectItem('drawRectangle')" id="drawRectangleBtn">
+                                绘制矩形范围</div>
+                            <!-- <div class="dropdown-item" onclick="selectItem('drawEllipse')" id="drawEllipseBtn">绘制椭圆形范围</div> -->
+                            <div class="dropdown-item" onclick="selectItem('drawPolygon')" id="drawPolygonBtn">绘制多边形范围
+                            </div>
+                            <div class="dropdown-item" id="cleardrawBtn">清除绘制</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- 搜索定位栏 -->
+                <div id="searchPosModal">
+                    <div>
+                        <span id="closeModel2">&times;</span>
+                    </div>
+                    <div id="searchPosContent">
+                        <input id="searchPosText" placeholder="搜索位置、公交站、地铁站" />
+                        <div id="searchPosButtom"><img src="../img/search.png"></div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 表格 -->
+            <div id="mid-table">
+                <div id="table-setting">
+                    <button type="button" id="openInputDataModel">导入数据</button>
+                    <button type="button" id="toggleEditButton">编辑数据</button>
+                    <!-- 显示当前选中的项目数量 -->
+                    <span id="showSelectedNum">(0/0已选择)</span>
+                    <!-- 切换选择 -->
+                    <div id="switchSelectBtn"><img src="../img/switchSelect.png" title="切换选择"></div>
+                    <!-- 清除所选内容 -->
+                    <div class="disabled" id="clearSelectedBtn"><img src="../img/clearSelected.png" title="清除所选内容">
+                    </div>
+                    <!-- 删除所选项 -->
+                    <div class="disabled" id="deleteSelectedBtn"><img src="../img/deleteSelected.png" title="删除所选项">
+                    </div>
+                    <!-- 显示所有记录 -->
+                    <div class="selected" id="tableShowAllRecordsBtn"><img src="../img/tableShowAllRecords.png"
+                            title="显示所有记录"></div>
+                    <!-- 显示所选的记录 -->
+                    <div id="tableShowSelectedRecordsBtn"><img src="../img/tableShowSelectedRecords.png" title="显示所选记录">
+                    </div>
+                </div>
+
+                <div id="table-container">
+                    <table id="data-table">
+                        <thead>
+                            <tr>
+                                <th class="checkbox-column"></th>
+                                <th>地名</th>
+                                <!-- <th>经度</th> -->
+                                <!-- <th>纬度</th> -->
+                                <th>城市</th>
+                                <th>排名</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!--   <tr>
+                                <td class="checkbox-column"><input type="checkbox">
+                                </td>
+                                <td contenteditable="false">地名1</td>
+                                <td contenteditable="false">经度1</td>
+                                <td contenteditable="false">纬度1</td>
+                                <td contenteditable="false">排名1</td>
+                            </tr>
+                            <tr>
+                                <td class="checkbox-column"><input type="checkbox">
+                                </td>
+                                <td contenteditable="false">地名2</td>
+                                <td contenteditable="false">经度2</td>
+                                <td contenteditable="false">纬度2</td>
+                                <td contenteditable="false">排名2</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div id="turnPage">
+                    <!-- <span><</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>...</span>
+                    <span>98</span>
+                    <span>99</span>
+                    <span>></span> -->
+                </div>
+
+
+
+                <!-- <div id="new-location">
+                    <span disabled>添加地点：</span>
+                    <input type="text" id="new-location-name" placeholder="请输入一个新的地点" disabled>
+                    <button id="new-location-btm" disabled>确定</button>
+                </div> -->
+
+            </div>
+        </div>
+
+        <!-- 字体系列 -->
+        <div class="mid-box" id="typeface-box" style="display: none;">
+            <!-- 字体修改 -->
+            <div id="mini-typeface-box2">
+                <div id="typeface-levelNum">
+                    <p>标签类别：</p>
+                    <select name="select-typeface-levelNum" id="select-typeface-levelNum">
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                </div>
+                <div id="changeFontSize">
+                    <p>字号大小：</p>
+                    <div class="fontSizeItems">
+                        <span>一级：</span><select name="oneFontSize"></select>
+                    </div>
+                    <div class="fontSizeItems">
+                        <span>二级：</span><select name="twoFontSize"></select>
+                    </div>
+                    <div class="fontSizeItems">
+                        <span>三级：</span><select name="threeFontSize"></select>
+                    </div>
+                    <div class="fontSizeItems">
+                        <span>四级：</span><select name="fourFontSize"></select>
+                    </div>
+                    <div class="fontSizeItems">
+                        <span>五级：</span><select name="fiveFontSize"></select>
+                    </div>
+                    <div class="fontSizeItems">
+                        <span>六级：</span><select name="sixFontSize"></select>
+                    </div>
+                    <div class="fontSizeItems">
+                        <span>七级：</span><select name="sevenFontSize"></select>
+                    </div>
+                </div>
+                <div id="changeFontWeight">
+                    <p>字重选择：</p>
+                    <select name="fontWeight" id="fontWeight"> </select>
+                </div>
+            </div>
+            <div id="mini-typeface-box">
+                <span id="intoChinese" class="mini-typeface-item selected"
+                    style="border-bottom: 3px solid rgb(57, 156, 279);background-color: rgb(241, 243, 247);">中文</span>
+                <span id="intoEnglish" class="mini-typeface-item">英文</span>
+                <span id="intoOther" class="mini-typeface-item">其他</span>
+                <span id="intoMy" class="mini-typeface-item">我的</span>
+                <span id="intoCustom" class="mini-typeface-item">自定义</span>
+            </div>
+            <div id="typeface-Chinese" class="one-typeface-box">
+                <ul id="chineseImages">
+                    <!-- <li>
+                        <div class="typefaceitem" style="font-family: 等线;">等线</div>
+                        <div class="usedTypeface">正在使用</div>
+                    </li>
+                    <li>
+                        <div class="typefaceitem" style="font-family: 等线;">等线</div>
+                        <div class="usedTypeface" style="display: none;">正在使用</div>
+                    </li>
+                    </li>
+                    <li>
+                        <div class="typefaceitem" style="font-family: 等线;">等线</div>
+                        <div class="usedTypeface" style="display: none;">正在使用</div>
+                    </li> -->
+                </ul>
+            </div>
+            <div id="typeface-English" class="one-typeface-box" style="display: none;">
+                <ul id="englishImages"></ul>
+            </div>
+            <div id="typeface-Other" class="one-typeface-box" style="display: none;">
+                <ul id="otherImages"></ul>
+            </div>
+            <div id="typeface-My" class="one-typeface-box" style="display: none;">
+                <ul></ul>
+            </div>
+            <div id="typeface-Custom" class="one-typeface-box" style="display: none;">
+                <ul></ul>
+            </div>
+        </div>
+
+        <!-- 颜色系列 -->
+        <div class="mid-box" id="color-box" style="display: none;">
+            <!-- 颜色修改 -->
+            <div class="color-item">
+                <div style="display: inline-block;">当前背景颜色：</div>
+                <div id="now-background-color"></div>
+            </div>
+            <div class="color-item">
+                <div>*点击选择背景配色方案</div>
+                <div id="background-color-item"></div>
+            </div>
+            <div class="color-item">
+                <span>当前文字配色：</span>
+                <div id="colorFlip">颜色翻转</div>
+                <div id="peise-current-color-bar"></div>
+            </div>
+            <div class="color-item">
+                <div>
+                    <span>*点击选择文字配色方案</span>
+                </div>
+                <div>
+                    <span>颜色离散数量：</span>
+                    <select name="select-color-levelNum" id="select-color-levelNum">
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                </div>
+                <div>
+                    <span>颜色离散方式：</span>
+                    <select name="select-color-dispersed" id="select-color-dispersed">
+                        <option value="相等间隔">相等间隔</option>
+                        <option value="分位数">分位数</option>
+                        <option value="自然间断点(Jenks)">自然间断点(Jenks)</option>
+                        <option value="几何间隔">几何间隔</option>
+                        <option value="标准差">标准差</option>
+                    </select>
+                </div>
+                <div id="ribbon"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- 夹层 -->
+    <div id="splitter">
+        <div class="resize" ref="resize" title="收缩侧边栏">⋮</div>
+    </div>
+
+
+
+    <!-- 展示标签云 -->
+    <div id="tagcloud-box">
+        <div id="tagcloud-setting">
+            <!-- 标签云运行按钮 -->
+            <div id="runBtn" class="tagcloud-setting-item">
+                <img src="../img/run.png">
+                <span>运行生成标签云</span>
+            </div>
+            <!-- 基于尺度的标签云放缩 -->
+            <div onclick="amplifyTagCloud()" id="amplifyBtm" class="tagcloud-setting-item">
+                <img src="../img/reduceTagCloud.png">
+                <span>粗略显示</span>
+            </div>
+            <div onclick="reduceTagCloud()" id="reduceBtm" class="tagcloud-setting-item">
+                <img src="../img/amplifyTagCloud.png">
+                <span>精细显示</span>
+            </div>
+            <!-- 添加显示排名与通行时间 -->
+            <div id="addRank" class="hide tagcloud-setting-item">
+                <img src="../img/addRank.png">
+                <span>显示排名信息</span>
+            </div>
+            <div id="addTime" class="hide tagcloud-setting-item">
+                <img src="../img/addTime.png">
+                <span>显示通行时间(min)</span>
+            </div>
+            <!-- 下载导出 -->
+            <div onclick="downloadFun" id="downloadBtn" class="tagcloud-setting-item">
+                <img src="../img/downloadBtn.png" alt="">
+                <span>下载导出</span>
+            </div>
+            <!-- 显示当前景点数量 -->
+            <span id="showPOINum" style="display: inline-block;color: black;">当前展示的景点数量：0</span>
+            </dv>
+        </div>
+        <canvas id="myCanvas"></canvas>
+        <!-- 图例 -->
+        <div id="legend">
+            <p>
+                <span style="font-size: 20px">与中心的距离</span>
+            </p>
+            <div id="legendColor">
+            </div>
+            <p style="text-align: right;">
+                <span id="maxDis"> 0 km </span>
+            </p>
+        </div>
+        <!-- 竖排功能 -->
+        <div id="verticalBtm">
+            <button id="returnCenterPos" onmouseover="showTooltip('返回中心点', this)" onmouseout="hideTooltip()">
+                <img src="../img/returnCenterPos.png">
+            </button>
+            <button id="returnScale" onmouseover="showTooltip('返回原始缩放', this)" onmouseout="hideTooltip()">
+                <img src="../img/returnScale.png">
+            </button>
+            <button id="grabCanvas" class="selected" onmouseover="showTooltip('漫游', this)" onmouseout="hideTooltip()">
+                <img src="../img/grab.png">
+            </button>
+            <button id="zoomIn" onmouseover="showTooltip('放大', this)" onmouseout="hideTooltip()">
+                <img src="../img/zoomIn.png">
+            </button>
+            <button id="zoomOut" onmouseover="showTooltip('缩小', this)" onmouseout="hideTooltip()">
+                <img src="../img/zoomOut.png">
+            </button>
+        </div>
+        <!-- 悬浮框 -->
+        <div id="tooltip"></div>
+        <!-- 地点详情窗口 -->
+        <div id="detailsWindow">
+            <div id="title">地点详细信息<span id="closeDetailsWindow">×</span></div>
+            <div id="detailsInformation"></div>
+        </div>
+    </div>
+
+
+    <!-- 数据导入模态框 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div>
+                <h2>数据导入</h2>
+                <span id="closeModel">&times;</span>
+            </div>
+            <!-- 选择文件 -->
+            <div>
+                <span>文件名：</span>
+                <input type="text" id="filenameInput">
+                <div>
+                    <button>选择文件</button>
+                    <input type="file" id="fileInput" accept=".txt, .csv">
+                </div>
+            </div>
+            <div>
+                <span for="encodingSelect">数据编码：</span>
+                <select id="encodingSelect">
+                    <option value="utf-8">UTF-8</option>
+                    <option value="gbk">GBK</option>
+                </select>
+            </div>
+            <div>
+                <span for="delimiterSelect">文本分隔符：</span>
+                <select id="delimiterSelect">
+                    <option value=",">逗号 (,)</option>
+                    <option value=";">分号 (;)</option>
+                    <option value=" ">空格 ( )</option>
+                </select>
+            </div>
+            <div>
+                <span for="coordinateSystem">数据坐标系：</span>
+                <select id="coordinateSystem">
+                    <option value="WGS1984">WGS1984</option>
+                    <option value="GCJ02">GCJ02</option>
+                    <option value="BD09">BD09</option>
+                </select>
+            </div>
+            <div>
+                <span for="placeColumn">地名字段：</span>
+                <select id="placeColumn"></select>
+            </div>
+            <div>
+                <span for="longitudeColumn">经度字段：</span>
+                <select id="longitudeColumn"></select>
+            </div>
+            <div>
+                <span for="latitudeColumn">纬度字段：</span>
+                <select id="latitudeColumn"></select>
+            </div>
+            <div>
+                <span for="rankColumn">量值字段：</span>
+                <select id="rankColumn"></select>
+            </div>
+            <div>
+                <button id="previewDataBtn">预览数据</button>
+                <button id="importDataBtn">导入数据</button>
+            </div>
+            <!-- 数据预览表格 -->
+            <div id="dataPreview">
+                <h3>数据预览：</h3>
+                <table>
+                    <thead>
+                        <th>地名</th>
+                        <th>经度</th>
+                        <th>纬度</th>
+                        <th>量值</th>
+                    </thead>
+                    <tbody id="dataPreviewtBody">
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 页脚 -->
+    <div id="footer">
+        <div id="footer-left">
+            <ul>
+                <li style="border-right: 1px solid rgb(255, 255, 255); padding-left: 0;"><a href="index.html"
+                        id="homeBtn">首页</a></li>
+                <li style="border-right: 1px solid rgb(255, 255, 255);"><a href="help.html" id="helpBtn">帮助</a></li>
+                <li style="border-right: 1px solid rgb(255, 255, 255);"><a href="feedback.html"
+                        id="feedbackBtn">意见反馈</a></li>
+                <li><a href="hubuCartographicGroup.html" id="aboutusBtn">关于我们</a></li>
+            </ul>
+            <span>Copyright © 2024 地名标签云 hubutagcloud.cn All Rights Reserved. 备案号:</span>
+            <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2024043287号-1</a>
+        </div>
+        <div id="footer-right">
+            <!-- <span></span> -->
+            <img src="../img/QRcode.png" alt="">
+            <img src="../img/vx.png" alt="">
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        // fabric画布
+        canvas = new fabric.Canvas('myCanvas', {
+            backgroundColor: backgroundColor[nowBackgroundColorIndex],
+            selectionColor: 'blue',
+            selectionLineWidth: 2,
+            // selection: false, // 禁用组选择
+            crossOrigin: 'anonymous',
+            fireRightClick: true, // 启用右键，button的数字为3
+            stopContextMenu: true, // 禁止默认右键菜单
+            // defaultCursor: 'grab',  // 鼠标样式
+        });
+
+        // 设置canvas画布宽高
+        tem = document.getElementById("tagcloud-box");
+        canvas.setWidth(tem.offsetWidth * 0.99);
+        canvas.setHeight(tem.offsetHeight * 0.99);
+
+
+
+        // 初始化参数
+        initPara();
+        // 加载高德地图
+        initAMAP();
+        // 读取POI数据
+        readJson("../json/chinapoi.csv");
+
+        // 表格窗口初始化
+        initTable();
+        // 字体窗口初始化
+        initFontSelection();
+        // 颜色窗口初始化
+        initcolorScheme();
+        // 地点详情信息交互界面
+        detailsWindowInteractive();
+        // 添加排名/时间交互
+        addRankTime();
+        // 初始化数据导入模块
+        initImportData();
+        // 上方栏目按钮事件
+        initHead();
+
+        // 记录当前的缩放与偏移
+        vpt = canvas.viewportTransform;
+
+        // 图片下载
+        var downloadBtn = document.getElementById("downloadBtn");
+        downloadBtn.addEventListener("click", downloadFun);
+
+
+
+        var intro = introJs();
+        intro.setOptions({
+            steps: [
+                {
+                    intro: "欢迎来到地名标签云网站！让我们带您浏览主要功能。"
+                },
+                {
+                    element: '#header',
+                    intro: "这是标签云网站的导航栏，您可在此处查看网站帮助、进行意见反馈等操作。"
+                },
+                {
+                    element: '#mid-map',
+                    intro: "您可以在地图展示窗口查看当前定位地图及景点数据。"
+                },
+                {
+                    element: '#mid-table',
+                    intro: "您可以在数据详情展示窗口查看所有的景点数据信息。"
+                },
+                {
+                    element: '#tagcloud-setting',
+                    intro: "您可以在此对标签云进行操作，包括显示排名、通行时间等操作。"
+                },
+                {
+                    element: '#myCanvas',
+                    intro: "系统将会在此窗口显示标签云。"
+                },
+            ],
+            nextLabel: "下一步",
+            prevLabel: "上一步",
+            showStepNumbers: true,   // 是否显示步骤编号
+            showProgress: true,  // 是否显示进度条
+            exitOnOverlayClick: true,  // 点击遮罩时是否可以退出引导
+            disableInteraction: false,  // 是否禁用对步骤元素的交互
+            exitOnEsc: true,  // 按下 ESC 键时是否退出引导
+            keyboardNavigation: true,  // 是否启用键盘导航
+            tooltipClass: 'customTooltipClass', // 使用自定义提示框样式
+            highlightClass: 'customHighlightClass', // 使用自定义高亮元素样式
+        });
+
+        intro.start();
+
+
+
+        var intro2 = introJs();
+        intro2.setOptions({
+            steps: [
+                {
+                    element: '#dropdownToggle',
+                    intro: "您需要在此对点数据进行筛选操作。"
+                },
+                {
+                    element: '#runBtn',
+                    intro: "完成数据筛选之后，再进行运行生成标签云"
+                },
+
+            ],
+            nextLabel: "下一步",
+            prevLabel: "上一步",
+            showStepNumbers: true,   // 是否显示步骤编号
+            showProgress: true,  // 是否显示进度条
+            exitOnOverlayClick: true,  // 点击遮罩时是否可以退出引导
+            disableInteraction: false,  // 是否禁用对步骤元素的交互
+            exitOnEsc: true,  // 按下 ESC 键时是否退出引导
+            keyboardNavigation: true,  // 是否启用键盘导航
+            tooltipClass: 'customTooltipClass', // 使用自定义提示框样式
+            highlightClass: 'customHighlightClass', // 使用自定义高亮元素样式
+        });
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

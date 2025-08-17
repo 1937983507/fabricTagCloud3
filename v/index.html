@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spatial Interaction Tag Cloud</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./src/d3.min.js"></script> <!-- D3 -->
+    <script src="./src/color.js"></script> <!-- 颜色 -->
+    <script src="./src/interactions.js"></script> <!-- 部分交互 -->
+    <script src="./src/sort.js"></script> <!-- 标签数据排序 -->
+    <script src="./src/china.js"></script> <!-- 中国geojson -->
+    <script src="./src/layout.js"></script> <!-- 摆放标签 -->
+    <script src="./src/archimedeanSpiral.js"></script> <!-- 阿基米德螺线 -->
+    <script src="./src/updatePosition.js"></script> <!-- 更新标签在阿基米德螺线上的位置 -->
+</head>
+<body>
+    <main>
+    </main>
+    <aside>
+        <section id="color">
+            <span class="title">选择颜色：</span>
+            <ul id="color-list"></ul>
+        </section>
+        <section id="data">
+            <span class="title">选择数据：</span>
+            <div id="data-wrapper">
+                <div id="upload-file-div">
+                    <input type="file" accept=".json" id="upload-file" style="display: none;">
+                    <label for="upload-file" id="upload-label">上传数据</label>
+                </div>
+                <div id="data-item">
+                    <input type="radio" name="data-input" id="dataFlight" class='built-in'  checked>
+                    <label for="dataFlight">航班数据（20220101）</label>
+                </div>
+                <div id="data-item">
+                    <input type="radio" name="data-input" class='built-in'  id="dataMigration22">
+                    <label for="dataMigration22">迁移数据（20220101）</label>
+                </div>
+                <div id="data-item">
+                    <input type="radio" name="data-input" class='built-in'  id="dataMigration23">
+                    <label for="dataMigration23">迁移数据（20230101）</label>
+                </div>
+                <div id="data-item">
+                    <input type="radio" name="data-input" class='built-in'  id="dataMigration24">
+                    <label for="dataMigration24">迁移数据（20240101）</label>
+                </div>
+        </section>
+        <section id="type">
+            <span class="title">选择类型：</span>
+            <div id="type-wrapper">
+                <div id="type-item">
+                    <input type="radio" name="type-input" id="typeIn"  class="inValue" checked>
+                    <label for="typeIn">流入</label>
+                </div>
+                <div id="type-item">
+                    <input type="radio" name="type-input" id="typeOut" class="outValue">
+                    <label for="typeOut">流出</label>
+                </div>
+                <div id="type-item">
+                    <input type="radio" name="type-input" id="typeTotal" class="totalValue">
+                    <label for="typeTotal">总和</label>
+                </div>
+            </div>
+        </section>
+        <!-- <section id="style"></section> -->
+        <section id="city">
+            <span class="title">选择中心城市：</span>
+            <ul id="city-list"></ul>
+        </section>
+        <section id="lang">
+            <span class="title">选择语言：</span>
+            <div id="langs-wrapper">
+                <div>
+                    <input type="radio" name="lang" id="zh"  class='input-lang' checked>
+                    <label for="zh">中文</label>
+                </div>
+                <div>
+                    <input type="radio" name="lang" id="en" class='input-lang'>
+                    <label for="en">English</label>
+                </div>
+            </div>
+        </section>
+        <section id="switch">
+            <span class="title">显示与隐藏</span>
+            <div id="type-wrapper">
+                <div id="type-item">
+                    <input type="checkbox" name="switch-input" id="switchTags" checked>
+                    <label for="switchTags">标签文本</label>
+                </div>
+                <div id="type-item">
+                    <input type="checkbox" name="switch-input" id="switchRects">
+                    <label for="switchRects">标签矩形</label>
+                </div>
+                <div id="type-item">
+                    <input type="checkbox" name="switch-input" id="switchCircles">
+                    <label for="switchCircles">标签簇外接圆</label>
+                </div>
+            </div>
+        </section>
+        <section id="btn">
+            <div id="btn-wrapper">
+                <button>生成标签云</button>
+            </div>
+            <button id="download-btn">下载svg</button>
+        </section>
+    </aside>
+</body>
+</html>
+<script>
+    // 获取 main tag
+    const main = d3.select('main');
+
+    // 画布
+    const svg = main.append('svg')
+        .attr('id', 'svg')
+        .style('width', '100%')
+        .style('height', '100%')
+        .style('display', 'block')
+        .style('background-color', 'white')
+
+    // 创建组
+    const mg = svg.append('g')
+        .attr('id', 'mainG')
+        .style('transform', 'translate(0, 0)');
+
+    // 外接矩形组
+    const rectG = mg.append('g')
+        .attr('id', 'rectG');
+    // 标签组
+    const textG = mg.append('g')
+        .attr('id', 'textG');
+    // 标签簇外接圆组
+    const circleG = mg.append('g')
+        .attr('id', 'circleG');
+    // 布局螺线点组
+    const spG = mg.append('g')
+        .attr('id', 'spG');
+
+    // 添加缩放与平移
+    const zoom = d3.zoom()
+        .on('zoom', zoomed);
+
+    svg.call(zoom);
+
+    function zoomed(e){
+        const {k,x,y} = e.transform;
+        mg.style('transform', `translate(${x}px, ${y}px) scale(${k})`);
+    }
+
+    // 用户上传的json文件
+    const uploadedFiles = {};
+
+    // 数据包围盒
+    const dataWrapper = d3.select('#data-wrapper');
+
+    // 上传文件input
+    const uploadInput = d3.select('input#upload-file');
+
+    uploadInput
+        .on('change', function(){
+            // 上传的文件
+            const file = this.files[0]; 
+            const fileName = file.name;
+            if(file.type !== 'application/json'){
+                alert('请上传json文件');
+                return;
+            }
+            if(fileName.slice(0, -5) in uploadedFiles){ // 文件已上传
+                alert(fileName + '文件已存在!');
+                // console.log(fileName + '文件已存在!');
+                return;
+            }
+            const reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function(){
+                const json = JSON.parse(this.result);
+                uploadedFiles[fileName.slice(0, -5)] = json;
+                console.log({json});
+                // 添加data-item
+                const divItem = document.createElement('div');
+                divItem.id = 'data-item';
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'data-input';
+                input.id = fileName.slice(0, -5);
+                input.className = 'upload';
+                const lab = document.createElement('label');
+                lab.innerText = fileName;
+                lab.htmlFor = fileName.slice(0, -5);
+                
+                divItem.appendChild(input);
+                divItem.appendChild(lab);
+                dataWrapper.node().appendChild(divItem);
+
+                input.addEventListener('change', function(){
+                    // 清除已经选择的中心城市
+                    const cityList = d3.select('#city-list').node();
+                    while(cityList.firstChild) {
+                        cityList.removeChild(cityList.firstChild);
+                    }
+                    // 对应的数据
+                    const data = uploadedFiles[this.id];
+                    for(let i = 0; i < data.length; i++){
+                        const cityName = data[i].source.name;    
+                        const li = document.createElement('li');
+                        li.className = 'city-li';
+                        const inp = document.createElement('input');
+                        inp.type = 'checkbox';
+                        inp.id = cityName;
+                        const lab = document.createElement('label');
+                        lab.htmlFor = cityName;
+                        lab.innerText = cityName;
+                        li.appendChild(inp);
+                        li.appendChild(lab);
+                        cityList.appendChild(li);
+                    }
+                });
+
+            };
+            console.log({uploadedFiles});
+        });
+
+    // 生成标签云btn
+    const generateBtn = d3.select('#btn button');
+
+    // 绑定单击事件
+    generateBtn
+        .on('click', async function(){
+            // 数据class
+            const dataClass = d3.select('input[name="data-input"]:checked').attr('class');
+            // 数据id
+            const dataId = d3.select('input[name="data-input"]:checked').attr('id');
+
+            // 类型id
+            const keyName = d3.select('input[name="type-input"]:checked').attr('class');
+
+            // 选中的中心城市
+            const cities = d3.selectAll('li.city-li input[type="checkbox"]:checked')
+                .nodes()
+                .map(n => n.id);
+
+            console.log({ dataId, keyName, cities});
+
+            // 内置数据
+            if(dataClass === 'built-in'){
+                // 根据数据id选择数据
+                switch(dataId){
+                    case 'dataMigration22':
+                        console.log("迁移22");
+                        const migrationData22 = await d3.json('./data/migrationData_20220101.json');
+                        generate(migrationData22, keyName, cities);
+                        break;
+                    case 'dataMigration23':
+                        console.log("迁移23");
+                        const migrationData23 = await d3.json('./data/migrationData_20230101.json');
+                        generate(migrationData23, keyName, cities);
+                        break;
+                    case 'dataMigration24':
+                        console.log("迁移24");
+                        const migrationData24 = await d3.json('./data/migrationData_20240101.json');
+                        generate(migrationData24, keyName, cities);
+                        break;
+                    default:
+                        // 清除已经绘制的文本 外接圆 外接矩形
+                        // d3.selectAll("text").remove();
+                        // d3.selectAll("circle").remove();
+                        // d3.selectAll("rect").remove();
+                        const flightData = await d3.json("./data/flightsData.json");
+                        // const flightDataFilter = flightData.filter(d => cities.includes(d.source.name));
+                        // console.log({flightData, flightDataFilter});
+                        // const s = sortTags(flightDataFilter, 'inValue');
+                        // placeTags(s, 'inValue');
+                        // console.log({s});
+                        generate(flightData, keyName, cities);
+                }
+            }else{ // 上传的数据
+                const uploadFile = uploadedFiles[dataId];
+                generate(uploadFile, keyName, cities);
+            }
+        });
+
+        /**
+         *  生成标签云
+         *  @param {Array} sourceData 原始数据
+         *  @param {String} typeKey 空间交互数据类型 in out or total
+         *  @param {Array} citiesArr 选择的中心城市列表
+         * */ 
+        function generate(sourceData, typeKey, citiesArr){
+            // 清除已经绘制的文本 外接圆 外接矩形
+            d3.selectAll("text").remove();
+            d3.selectAll("circle").remove();
+            d3.selectAll("rect").remove();
+
+            // 筛选数据
+            const dataFilter = sourceData.filter(d => citiesArr.includes(d.source.name));
+            const s = sortTags(dataFilter, typeKey);
+            placeTags(s, typeKey);
+            console.log({s});
+        }
+
+        // 下载svg
+        document.getElementById('download-btn').addEventListener('click', function(){
+            const svg = document.getElementById('svg');
+            // 复制svg
+            const svgClone = svg.cloneNode(true);
+            // 重置svg的尺寸
+            const g = svgClone.getElementById('mainG');
+            const gBBox = d3.select('#mainG').node().getBBox();
+            svgClone.style.width = gBBox.width + 'px';
+            svgClone.style.height = gBBox.height + 'px';
+            g.style.transform = `translate(${-gBBox.x}px, ${-gBBox.y}px) scale(1)`;
+
+            // 选择的中心城市首字
+            const cities = d3.selectAll('li.city-li input[type="checkbox"]:checked')
+                .nodes()
+                .map(n => n.id.slice(0,1))
+                .join('');
+            // 数据名称
+            const dataName = d3.select('input[name="data-input"]:checked')
+                .node()
+                .nextElementSibling
+                .innerText;
+
+            // svg图片名称
+            const svgName = cities + '_' + dataName + '.svg';
+
+            var serializer = new XMLSerializer();
+            var svgString = serializer.serializeToString(svgClone);
+
+            var blob = new Blob([svgString], { type: 'image/svg+xml' });
+            var url = URL.createObjectURL(blob);
+
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = svgName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+</script>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地名标签云-帮助</title>
+    <link rel="stylesheet" type="text/css" href="../css/help.css">
+    <script src="../js/help.js"></script>
+    <!-- 上方按钮事件 -->
+    <script src="../js/initHead.js"></script>
+</head>
+
+<body>
+
+    <!-- 头部 -->
+    <div id="header">
+        <div id="img-logo">
+            <img src="../img/logo.png"></img>
+            <!-- <p>中心型标签云logo</p> -->
+        </div>
+
+        <div id="header-left">
+            <button type="button" id="homeBtn">首页</button>
+            <button type="button" id="fileBtn">文件</button>
+            <button type="button" id="saveFileBtn">保存</button>
+            <button type="button" id="uploadFileBtn">上传到云端</button>
+            <button type="button" id="shareTagCloudBtn">分享</button>
+            <button type="button" id="helpBtn">帮助</button>
+            <button type="button" id="feedbackBtn">意见反馈</button>
+            <button type="button" id="aboutusBtn">关于我们</button>
+        </div>
+
+        <div id="header-right">
+            <!-- <a> 下载到本地 </a> -->
+            <a id="LoginAndRegisterBtn">
+                <!-- <span> 登录/注册 </span> -->
+                <!-- <img src="../img/user.png" alt="" style="height: 80%; margin-top: 8px;"> -->
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        <!-- 左侧导航 -->
+        <div class="sidebar" id="sidebar-left">
+            <h3>用户手册</h3>
+            <ul>
+                <li><a href="#introduction-page" class="active">概述</a></li>
+                <li><a href="#getting-started-page">快速上手</a></li>
+                <li>
+                    <a href="#primer-page" style="user-select: none; ">入门教程</a>
+                    <ul>
+                        <li><a href="#mapDisplay-page">地图显示模块</a></li>
+                        <li><a href="#dataManagement-page">数据管理模块</a></li>
+                        <li><a href="#tagCloudGeneration-page">标签云生成模块</a></li>
+                        <li><a href="#fontChange-page">字体交互模块</a></li>
+                        <li><a href="#colourChange-page">配色交互模块</a></li>
+                        <li><a href="#remainingInteractive-page">其余交互功能</a></li>
+                    </ul>
+                </li>
+                <li><a href="#commonProblems-page">常见问题</a></li>
+                <li><a href="#updateLog-page">更新日志</a></li>
+                <li><a href="#relatedDownloads-page">相关下载</a></li>
+                <li><a href="#video-page">视频专区</a></li>
+            </ul>
+        </div>
+
+        <!-- 主要内容 -->
+        <div class="main-content">
+            <div class="main-content-pages">
+
+                <!-- 概述 -->
+                <div id="introduction-page" class="main-content-page" style="display: block;">
+                    <div class="page-title">
+                        <h1>概述</h1>
+                        <span>最后更新时间：2024年3月7日</span>
+                    </div>
+                    <section id="introduction1">
+                        <h2>1. 简介</h2>
+                        <p>
+                            随着无线通信技术和智能移动终端的广泛普及，基于位置的服务（Location-based Service,LBS）迅速崛起，为用户提供更为个性化和便捷的地理数据服务。
+                            传统的地理信息系统（GIS）主要面向专业人员，而LBS的发展使得大众用户可以轻松地检索附近的景点、餐馆、酒店等信息，实现了地理位置数据的即时获取和应用。
+                        </p>
+                        <p>
+                            标签云（Tag Cloud），又称词云，作为一种数据可视化方法，通常直接利用文字符号（或文字标签）来表达文本资料中的主题词或关键词，
+                            其基本原理涉及根据主题词的类别、出现频率及重要性等因素，为每个主题词分配相应的字号、字重、颜色及字体方向等视觉属性，
+                            并将这些标签以无压盖冲突的方式展现于二维或三维空间。
+                        </p>
+                        <img src="../img/introduction/1geoWordCloud.png" style="width: 80%;"></img>
+                        <p>
+                            已有研究表明标签云可帮助用户快速理解文本资料的主干信息，并有诸多研究结合具体案例扩展了标签云的应用：
+                            在视觉编码方面，基于原有的文字编码，通过额外的图元来传递定量信息，
+                            例如SparkClouds在标签云上添加迷你趋势线以展示时序数据、Parallel Tag Clouds 将平行坐标系与标签云相结合以表达时序数据中同一单词在不同时间的词频变化；
+                            在布局方法上，包括常见的行列布局、Wordle算法（螺旋线算法）、力导向布局，
+                            其中Wordle算法因结果美观性成为经典算法流行至今，但其算法复杂度较高，因此有许多螺旋线算法的变种算法以适应不同的词云生成目的。
+                        </p>
+                        <p>
+                            中心型标签云作为标签云的变体，在地理信息领域的应用上展现了独特的潜力。
+                            其通过将标签以某一地理位置为中心，突显特定地理区域的主题词汇，提供更精准和直观的地理信息表达。
+                            此扩展应用为地理空间数据的可视化提供了新的方式，有助于深化对地理信息中关键概念和地域特征的理解，进而推动地理学等领域的研究和分析。
+                        </p>
+                        <p>
+                            本系统将会基于中心型标签云相关理论，将用户所绘中心作为布局中心点，将兴趣点转换为文字标签后环绕中心摆放，并
+                            利用色带、字体大小、字重等视觉变量组合以表达兴趣点的多维属性。
+                            本系统集成地图的部分功能和标签云的视觉展示，旨在满足用户对于地理位置信息的多层次需求，
+                            实现对某一场所的全局和局部尺度的兼顾观测，为移动生活带来更便捷、智能的地理服务体验。
+                        </p>
+
+                    </section>
+                    <section id="introduction2">
+                        <h2>2. 特色功能</h2>
+                        <h3>2.1 主体功能</h3>
+                        <p>本系统基于Fabric.js相关接口，复用其对象模型与事件机制，创新性地构建文本标签的多角度径向移位算法，其中包括自适应范围扫描、最优步长偏移等步骤。通过这些算法，在保证局部单一标签尽量无偏的前提下，完成了全局无压盖的标签云绘制。
+                        </p>
+                        <img src="../img/introduction/2AlgorithmDetails.png" alt="" style="width: 100%;">
+                        <p>在已绘制的标签云中，系统采用了色带属性来表示各标签距离中心位置的远近，并利用字体大小来表征地点的重要性或优劣程度。这种绘制方式旨在提高标签云的可视化效果，使得用户能够更直观地理解标签的空间分布和相对重要性。
+                        </p>
+                        <img src="../img/introduction/3tagCloudDrawing.png" alt="" style="width: 100%;">
+
+                        <h3>2.2 交互功能</h3>
+                        <p>在绘制地名标签云这一主体功能之外，系统还提供一系列交互定制功能，以供用户对标签云进行定制化设计。具体包括：</p>
+                        <p>①数据定制化导入：系统内置有全国范围内的景点兴趣点数据，同时支持用户导入自定义兴趣点数据，拓展绘制内容的范围。用户可以根据自身需求以及所处行业的特点，生成具有更高定制性和适用性的标签云，以更好地满足不同用户群体的需求。
+                        </p>
+                        <img src="../img/introduction/4dataImport.png" alt="" style="width: 100%;">
+                        <p>②自定义标签云符号渲染：支持用户对标签的符号渲染进行修改，具体包括其字体、字号、字重、色带、背景色等属性。其中字号可以由用户自定义分类数量，颜色色带可以由用户自定义分级数量及方式（包括分位数、相等间隔、几何间隔等）。
+                        </p>
+                        <img src="../img/introduction/5fontModification.png" alt="" style="width: 100%;">
+                        <img src="../img/introduction/6ColourModification.png" alt="" style="width: 100%;">
+                        <p>③多尺度标签云显示：构建多尺度模型，支持兼顾全局与局部效应的中心型标签云预览漫游。其参照传统地图在应对尺度效应时采用的方法策略，具体指的是层级结构设计思想：通过在不同的层次上呈现标签，以应对不同的地理尺度；具体而言，在较大的尺度下减少标签数量，而在较小尺度下展示更为详细和精细的标签信息，以实现对标签云的自主探索与调整。
+                        </p>
+                        <img src="../img/introduction/7multiscaleModel.png" alt="" style="width: 100%;">
+                    </section>
+                </div>
+
+                <!-- 快速上手 -->
+                <div id="getting-started-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>快速上手</h1>
+                        <span>最后更新时间：2024年3月8日</span>
+                    </div>
+                    <section id="getting-started1">
+                        <!-- <h2> </h2> -->
+                        <div>
+                            <span>1</span>
+                            <h3>进入地名标签云页面</h3>
+                            <p>用户在登录地名标签云系统后，将会看到其初始界面。</p>
+                            <img src="../img/getting-started/1initialScreen.png" alt="" style="width: 100%;">
+                        </div>
+                        <div>
+                            <span>2</span>
+                            <h3>查看兴趣点数据</h3>
+                            <p>可以通过地图查看目前系统内存储的兴趣点数据。</p>
+                            <img src="../img/getting-started/2mapView.png" alt="" style="width: 50%;">
+                        </div>
+                        <div>
+                            <span>3</span>
+                            <h3>兴趣点数据筛选</h3>
+                            <p>可以对其中的数据进行筛选，并通过二维表查看目前筛选的数据。</p>
+                            <img src="../img/getting-started/3dataFiltering.png" alt="" style="width: 100%;">
+                        </div>
+                        <div>
+                            <span>4</span>
+                            <h3>生成地名标签云</h3>
+                            <p>单击【运行生成标签云】之后，将会生成对应的地名标签云。</p>
+                            <img src="../img/getting-started/4tagCloudDrawing.png" alt="" style="width: 100%;">
+                        </div>
+                        <div>
+                            <span>5</span>
+                            <h3>字体修改</h3>
+                            <p>在【字体】栏目可以对当前的标签云的字体属性进行更改，包括字号、字重、字体属性。</p>
+                            <img src="../img/getting-started/5fontModification.png" alt="" style="width: 100%;">
+                        </div>
+                        <div>
+                            <span>6</span>
+                            <h3>配色修改</h3>
+                            <p>在【配色】栏目可以对当前的标签云的配色属性进行更改，包括背景色、色带。</p>
+                            <img src="../img/getting-started/6ColourModification.png" alt="" style="width: 100%;">
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 入门教程 -->
+                <div id="primer-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>入门教程</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="mapDisplay">
+                        <h2>1. 地图显示模块</h2>
+                        <p>系统初始界面将会展示用户所在定位的高德地图，并以点覆盖物的形式展示全国范围内的景点POI数据。</p>
+                        <img src="../img/primer/1MapView.png" alt="" style="width: 100%;">
+                        <p>用户可以在此界面使用鼠标滚轮缩放、鼠标拖拽等事件实现对地图的缩放漫游。且当鼠标悬浮于某一景点POI上时，将会显示该景点的名称。</p>
+                        <img src="../img/primer/2showAttractionName.png" alt="" style="width: 50%;">
+                        <p>本系统也支持用户在检索框中输入某一地点，高德地图将会自动通过检索定位缩放移动至用户所输入的地点。</p>
+                        <img src="../img/primer/3searchAndLocate.png" alt="" style="width: 100%;">
+                        <p>同时，在该界面还有放缩按钮、比例尺、地图切换工具等地图工具，支持用户对高德地图进行缩放、切换卫星遥感地图等操作。</p>
+                        <img src="../img/primer/4remoteSensingMaps.png" alt="" style="width: 100%;">
+                    </section>
+                    <section id="dataManagement">
+                        <h2>2. 数据管理模块</h2>
+                        <section>
+                            <h3>2.1 数据显示</h3>
+                            <p>系统初始界面将会以二维数据表的形式展示当前系统存储的兴趣点数据，系统内默认存储的是全国的景点兴趣点数据。</p>
+                            <img src="../img/primer/5DataImport.png" alt="" style="width: 100%;">
+                            <p>在单击【编辑表格】之后，用户可以对二维表格内的数据进行修改；再次单击【停止编辑】之后，即可将编辑内容保存至系统。</p>
+                            <img src="../img/primer/6dataEditing.png" alt="" style="width: 100%;">
+                            <p>在数据显示模块的右上角有一系列数据操作按钮，包括【切换选择】、【清空选择】、【删除选择】、【显示所有记录】、【显示所选记录】。</p>
+                            <p>用户可以使用鼠标单击单行数据记录前面的复选框，即可选中该数据记录。然后便可通过【显示所有记录】与【显示所选记录】切换当前显示的数据。</p>
+                            <img src="../img/primer/7showPartialRecords.png" alt="" style="width: 100%;">
+                            <p>用户可以通过【切换选择】，将选中与未选中的记录进行切换，即将选中记录转为未选中，将未选中记录转为选中项目。</p>
+                            <p>用户可以通过【清空选择】，将所有选中项目进行清空。</p>
+                            <img src="../img/primer/8toggleSelection.png" alt="" style="width: 100%;">
+                            <p>若是当前已有选中项目，则用户可以通过【删除记录】对选中的项目进行删除。</p>
+                            <p>同时用户可以输入地名，对数据记录进行添加。注意此时需要处于数据可编辑状态。</p>
+                            <img src="../img/primer/9deleteRecord.png" alt="" style="width: 100%;">
+                        </section>
+                        <section>
+                            <h3>2.2 数据导入</h3>
+                            <p>系统默认存储全国范围内的景点兴趣点数据，用户也可通过数据导入模块，导入自定义兴趣点数据，拓展绘制内容的范围。</p>
+                            <p>在【数据导入】窗口，需要用户指定文件名、数据编码、文本分隔符、数据坐标系属性；在系统在读取首行字段之后，用户还需要进行字段匹配，包括地名、经度、纬度、量值字段（例如景点的评分数等定量指标）。接着，便可在窗口下方进行数据预览。在用户检查字段匹配之后，即可单击【导入数据】将文件中所有兴趣点数据导入系统。
+                            </p>
+                            <img src="../img/primer/10dataImport.png" alt="" style="width: 100%;">
+                            <p>通过数据导入模块，用户可以根据自身需求以及所处行业的特点，生成具有更高定制性和适用性的标签云，以更好地满足不同用户群体的需求。</p>
+                        </section>
+                        <section>
+                            <h3>2.3 数据筛选</h3>
+                            <p>用户可以将“地图显示模块”与“数据显示模块”进行交互，即用户通过地图显示模块的【数据筛选】功能，在地图上绘制不同的面状覆盖物，即可在系统中筛选对应的点数据，
+                                以此筛选即将参与绘制标签云的兴趣点数据。</p>
+                            <p>其中绘制的面状覆盖物支持用户绘制圆形、矩形、椭圆形、多边形覆盖物。通过也支持用户通过【清除绘制】将所有的覆盖物与已筛选数据进行清除。</p>
+                            <img src="../img/primer/11dataFiltering.png" alt="" style="width: 100%;">
+                        </section>
+                    </section>
+                    <section id="tagCloudGeneration">
+                        <h2>3. 标签云生成模块</h2>
+                        <section>
+                            <h3>3.1 生成标签云</h3>
+                            <p>用户在地图显示模块进行数据筛选之后，再次单击【运行生成标签云】，系统将会对用户所框选的兴趣点数据进行筛选，并采用分位数法对其字号、颜色进行设置，接着使用内置的压盖检测与多角度径向偏移策略绘制不重叠且基本无偏的地名标签云。
+                            </p>
+                            <img src="../img/primer/12generateTagCloud.png" alt="" style="width: 100%;">
+                            <p>本系统基于Fabric.js相关接口，复用其对象模型与事件机制，创新性地构建文本标签的多角度径向移位算法，其中包括自适应范围扫描、最优步长偏移等步骤。通过这些算法，在保证局部单一标签尽量无偏的前提下，完成了全局无压盖的标签云绘制。
+                            </p>
+                            <p>在已绘制的标签云中，系统采用了色带属性来表示各标签距离中心位置的远近，并利用字体大小来表征地点的重要性或优劣程度。这种绘制方式旨在提高标签云的可视化效果，使得用户能够更直观地理解标签的空间分布和相对重要性。
+                            </p>
+                        </section>
+                        <section>
+                            <h3>3.2 添加排名与时间</h3>
+                            <p>在用户单击【显示排名信息】或是【显示通行时间(min)】之后，将会动态在各标签后面添加显示该兴趣点在当前城市的排名或是距离中心点的通行时间，其中通行时间是通过高德Web驾车API进行动态获取。
+                            </p>
+                            <img src="../img/primer/13addTime.png" alt="" style="width: 100%;">
+                        </section>
+                        <section>
+                            <h3>3.3 多尺度效应</h3>
+                            <p>用户可以通过单击【精细显示】与【粗略显示】，调用地理多尺度模型对展示在图层上的标签数量进行增减。</p>
+                            <p>系统构建的多尺度模型，支持兼顾全局与局部效应的中心型标签云预览漫游。其参照传统地图在应对尺度效应时采用的方法策略，具体指的是层级结构设计思想：通过在不同的层次上呈现标签，以应对不同的地理尺度；具体而言，在较大的尺度下减少标签数量，而在较小尺度下展示更为详细和精细的标签信息，以实现对标签云的自主探索与调整。
+                            </p>
+                            <img src="../img/primer/14multiscaleModel.png" alt="" style="width: 100%;">
+                        </section>
+                    </section>
+                    <section id="fontChange">
+                        <h2>4. 字体交互模块</h2>
+                        <p>系统可单击左侧导航栏【字体】切换至字体改变交互模块。在此模块下，用户可以对字体类别数量、字号大小、字重、字体进行修改。其每一修改，将会对已绘制的地名标签云进行实时更新。</p>
+                        <img src="../img/primer/15changeFont.png" alt="" style="width: 100%;">
+                    </section>
+                    <section id="colourChange">
+                        <h2>5. 配色交互模块</h2>
+                        <p>系统可单击左侧导航栏【配色】切换至配色改变交互模块。在此模块下，用户可以对标签云背景、色带、配色数量、渲染方式进行修改。其中，配色数量即是将所有文本标签划分为几种颜色；而渲染方式即是包括相等间隔、分位数、自然间断点、几何间隔、标准差等符号渲染方式。其每一修改，将会对已绘制的地名标签云进行实时更新。
+                        </p>
+                        <img src="../img/primer/16changeColour.png" alt="" style="width: 100%;">
+                    </section>
+                    <section id="remainingInteractive">
+                        <h2>6. 其余交互功能</h2>
+                        <p>在用户鼠标悬浮至某一图例上时，将会动态将对应类别的标签进行高亮显示。</p>
+                        <img src="../img/primer/17highlighter.png" alt="" style="width: 100%;">
+                        <p>在用户单击某一标签后，将会调用地点详情信息窗口，在其上展示该景点的地点名、经纬度、与中心点之间的距离、在该城市的排名等信息。</p>
+                        <img src="../img/primer/18dataDetails.png" alt="" style="width: 100%;">
+                        <p>在系统窗口右侧还存在一竖排功能栏，具体包括【返回中心位置】、【返回原始缩放】、【漫游】、【放大】、【缩小】，用户可通过这一系列功能进行交互操作。</p>
+                        <img src="../img/primer/19verticalFunction.png" alt="" style="width: 100%;">
+                    </section>
+                </div>
+
+                <!-- 地图显示模块 -->
+                <div id="mapDisplay-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>地图显示模块</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="mapDisplay1">
+                        <!-- <h2>地图显示模块1</h2> -->
+                        <p>系统初始界面将会展示用户所在定位的高德地图，并以点覆盖物的形式展示全国范围内的景点POI数据。</p>
+                        <img src="../img/primer/1MapView.png" alt="" style="width: 100%;">
+                        <p>用户可以在此界面使用鼠标滚轮缩放、鼠标拖拽等事件实现对地图的缩放漫游。且当鼠标悬浮于某一景点POI上时，将会显示该景点的名称。</p>
+                        <img src="../img/primer/2showAttractionName.png" alt="" style="width: 50%;">
+                        <p>本系统也支持用户在检索框中输入某一地点，高德地图将会自动通过检索定位缩放移动至用户所输入的地点。</p>
+                        <img src="../img/primer/3searchAndLocate.png" alt="" style="width: 100%;">
+                        <p>同时，在该界面还有放缩按钮、比例尺、地图切换工具等地图工具，支持用户对高德地图进行缩放、切换卫星遥感地图等操作。</p>
+                        <img src="../img/primer/4remoteSensingMaps.png" alt="" style="width: 100%;">
+                    </section>
+                </div>
+
+                <!-- 数据管理模块 -->
+                <div id="dataManagement-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>数据管理模块</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="dataManagement1">
+                        <h2>1. 数据显示</h2>
+                        <p>系统初始界面将会以二维数据表的形式展示当前系统存储的兴趣点数据，系统内默认存储的是全国的景点兴趣点数据。</p>
+                        <img src="../img/primer/5DataImport.png" alt="" style="width: 100%;">
+                        <p>在单击【编辑表格】之后，用户可以对二维表格内的数据进行修改；再次单击【停止编辑】之后，即可将编辑内容保存至系统。</p>
+                        <img src="../img/primer/6dataEditing.png" alt="" style="width: 100%;">
+                        <p>在数据显示模块的右上角有一系列数据操作按钮，包括【切换选择】、【清空选择】、【删除选择】、【显示所有记录】、【显示所选记录】。</p>
+                        <p>用户可以使用鼠标单击单行数据记录前面的复选框，即可选中该数据记录。然后便可通过【显示所有记录】与【显示所选记录】切换当前显示的数据。</p>
+                        <img src="../img/primer/7showPartialRecords.png" alt="" style="width: 100%;">
+                        <p>用户可以通过【切换选择】，将选中与未选中的记录进行切换，即将选中记录转为未选中，将未选中记录转为选中项目。</p>
+                        <p>用户可以通过【清空选择】，将所有选中项目进行清空。</p>
+                        <img src="../img/primer/8toggleSelection.png" alt="" style="width: 100%;">
+                        <p>若是当前已有选中项目，则用户可以通过【删除记录】对选中的项目进行删除。</p>
+                        <p>同时用户可以输入地名，对数据记录进行添加。注意此时需要处于数据可编辑状态。</p>
+                        <img src="../img/primer/9deleteRecord.png" alt="" style="width: 100%;">
+                    </section>
+                    <section id="dataManagement2">
+                        <h2>2. 数据导入</h2>
+                        <p>系统默认存储全国范围内的景点兴趣点数据，用户也可通过数据导入模块，导入自定义兴趣点数据，拓展绘制内容的范围。</p>
+                        <p>在【数据导入】窗口，需要用户指定文件名、数据编码、文本分隔符、数据坐标系属性；在系统在读取首行字段之后，用户还需要进行字段匹配，包括地名、经度、纬度、量值字段（例如景点的评分数等定量指标）。接着，便可在窗口下方进行数据预览。在用户检查字段匹配之后，即可单击【导入数据】将文件中所有兴趣点数据导入系统。
+                        </p>
+                        <img src="../img/primer/10dataImport.png" alt="" style="width: 100%;">
+                        <p>通过数据导入模块，用户可以根据自身需求以及所处行业的特点，生成具有更高定制性和适用性的标签云，以更好地满足不同用户群体的需求。</p>
+                    </section>
+                    <section id="dataManagement3">
+                        <h2>3. 数据筛选</h2>
+                        <p>用户可以将“地图显示模块”与“数据显示模块”进行交互，即用户通过地图显示模块的【数据筛选】功能，在地图上绘制不同的面状覆盖物，即可在系统中筛选对应的点数据，
+                            以此筛选即将参与绘制标签云的兴趣点数据。</p>
+                        <p>其中绘制的面状覆盖物支持用户绘制圆形、矩形、椭圆形、多边形覆盖物。通过也支持用户通过【清除绘制】将所有的覆盖物与已筛选数据进行清除。</p>
+                        <img src="../img/primer/11dataFiltering.png" alt="" style="width: 100%;">
+                    </section>
+                </div>
+
+                <!-- 标签云生成模块 -->
+                <div id="tagCloudGeneration-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>标签云生成模块</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="tagCloudGeneration1">
+                        <h2>1. 生成标签云</h2>
+                        <p>用户在地图显示模块进行数据筛选之后，再次单击【运行生成标签云】，系统将会对用户所框选的兴趣点数据进行筛选，并采用分位数法对其字号、颜色进行设置，接着使用内置的压盖检测与多角度径向偏移策略绘制不重叠且基本无偏的地名标签云。
+                        </p>
+                        <img src="../img/primer/12generateTagCloud.png" alt="" style="width: 100%;">
+                        <p>本系统基于Fabric.js相关接口，复用其对象模型与事件机制，创新性地构建文本标签的多角度径向移位算法，其中包括自适应范围扫描、最优步长偏移等步骤。通过这些算法，在保证局部单一标签尽量无偏的前提下，完成了全局无压盖的标签云绘制。
+                        </p>
+                        <p>在已绘制的标签云中，系统采用了色带属性来表示各标签距离中心位置的远近，并利用字体大小来表征地点的重要性或优劣程度。这种绘制方式旨在提高标签云的可视化效果，使得用户能够更直观地理解标签的空间分布和相对重要性。
+                        </p>
+                    </section>
+                    <section id="tagCloudGeneration2">
+                        <h2>2. 添加排名与时间</h2>
+                        <p>在用户单击【显示排名信息】或是【显示通行时间(min)】之后，将会动态在各标签后面添加显示该兴趣点在当前城市的排名或是距离中心点的通行时间，其中通行时间是通过高德Web驾车API进行动态获取。
+                        </p>
+                        <img src="../img/primer/13addTime.png" alt="" style="width: 100%;">
+                    </section>
+                    <section id="tagCloudGeneration3">
+                        <h2>3. 多尺度效应</h2>
+                        <p>用户可以通过单击【精细显示】与【粗略显示】，调用地理多尺度模型对展示在图层上的标签数量进行增减。</p>
+                        <p>系统构建的多尺度模型，支持兼顾全局与局部效应的中心型标签云预览漫游。其参照传统地图在应对尺度效应时采用的方法策略，具体指的是层级结构设计思想：通过在不同的层次上呈现标签，以应对不同的地理尺度；具体而言，在较大的尺度下减少标签数量，而在较小尺度下展示更为详细和精细的标签信息，以实现对标签云的自主探索与调整。
+                        </p>
+                        <img src="../img/primer/14multiscaleModel.png" alt="" style="width: 100%;">
+                    </section>
+                </div>
+
+                <!-- 字体交互模块 -->
+                <div id="fontChange-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>字体交互模块</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="fontChange1">
+                        <!-- <h2>字体交互模块1</h2> -->
+                        <p>系统可单击左侧导航栏【字体】切换至字体改变交互模块。在此模块下，用户可以对字体类别数量、字号大小、字重、字体进行修改。其每一修改，将会对已绘制的地名标签云进行实时更新。</p>
+                        <img src="../img/primer/15changeFont.png" alt="" style="width: 100%;">
+                    </section>
+                </div>
+
+                <!-- 配色交互模块 -->
+                <div id="colourChange-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>配色交互模块</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="colourChange1">
+                        <!-- <h2>配色交互模块1</h2> -->
+                        <p>系统可单击左侧导航栏【配色】切换至配色改变交互模块。在此模块下，用户可以对标签云背景、色带、配色数量、渲染方式进行修改。其中，配色数量即是将所有文本标签划分为几种颜色；而渲染方式即是包括相等间隔、分位数、自然间断点、几何间隔、标准差等符号渲染方式。其每一修改，将会对已绘制的地名标签云进行实时更新。
+                        </p>
+                        <img src="../img/primer/16changeColour.png" alt="" style="width: 100%;">
+                    </section>
+                </div>
+
+                <!-- 其余交互功能 -->
+                <div id="remainingInteractive-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>其余交互功能</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="remainingInteractive1">
+                        <!-- <h2>其余交互功能1</h2> -->
+                        <p>在用户鼠标悬浮至某一图例上时，将会动态将对应类别的标签进行高亮显示。</p>
+                        <img src="../img/primer/17highlighter.png" alt="" style="width: 100%;">
+                        <p>在用户单击某一标签后，将会调用地点详情信息窗口，在其上展示该景点的地点名、经纬度、与中心点之间的距离、在该城市的排名等信息。</p>
+                        <img src="../img/primer/18dataDetails.png" alt="" style="width: 100%;">
+                        <p>在系统窗口右侧还存在一竖排功能栏，具体包括【返回中心位置】、【返回原始缩放】、【漫游】、【放大】、【缩小】，用户可通过这一系列功能进行交互操作。</p>
+                        <img src="../img/primer/19verticalFunction.png" alt="" style="width: 100%;">
+                    </section>
+                </div>
+
+
+                <!-- 常见问题 -->
+                <div id="commonProblems-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>常见问题</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="commonProblems1">
+                        <h3>等待更新中...</h3>
+                    </section>
+                </div>
+
+                <!-- 更新日志 -->
+                <div id="updateLog-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>更新日志</h1>
+                        <span>最后更新时间：2024年3月10日</span>
+                    </div>
+                    <section id="updateLog1">
+                        <h3>等待更新中...</h3>
+                    </section>
+                </div>
+
+                <!-- 相关下载 -->
+                <div id="relatedDownloads-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>相关下载</h1>
+                        <span>最后更新时间：2024年3月17日</span>
+                    </div>
+                    <section id="relatedDownloads1">
+                        <h2>帮助文档</h2>
+                        <ul>
+                            <li><a id="downloadLink_introduction" href="#">附件1：《地名标签云-概述.pdf》</a></li>
+                            <li><a id="downloadLink_gettingStarted" href="#">附件2：《地名标签云-快速上手.pdf》</a></li>
+                            <li><a id="downloadLink_primer" href="#">附件3：《地名标签云-入门教程.pdf》</a></li>
+                        </ul>
+                    </section>
+                    <section id="relatedDownloads2">
+                        <h2>示例数据</h2>
+                        <ul>
+                            <li><a id="downloadLink_exampleData" href="#">《示例数据.csv》</a></li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- 视频专区 -->
+                <div id="video-page" class="main-content-page" style="display: none;">
+                    <div class="page-title">
+                        <h1>视频专区</h1>
+                        <span>最后更新时间：2024年3月24日</span>
+                    </div>
+                    <section id="video1">
+                        <h3>等待更新中...</h3>
+                    </section>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <!-- 右侧栏目 -->
+        <div class="sidebar" id="sidebar-right">
+            <div class="star_help">
+                <div class="star_title">这篇文档有帮助吗？</div>
+                <div class="star_tips">
+                    <span>完全没有</span>
+                    <span>非常有</span>
+                </div>
+                <div class="stars">
+                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
+                </div>
+                <div class="star_feedback" id="feedback_bad">
+                    <div class="star_title">您遇到了哪些问题？</div>
+                    <ul class="feedback_list">
+                        <li class="a_feedback_list" value="1">内容错误</li>
+                        <li class="a_feedback_list" value="2">内容看不懂</li>
+                        <li class="a_feedback_list" value="3">缺少图片示例</li>
+                        <li class="a_feedback_list" value="4">找不到内容，没更新</li>
+                        <li class="a_feedback_list" value="5">其他</li>
+                    </ul>
+                    <div class="star_title">您可以详细描述问题</div>
+                    <textarea class="feedback_text" placeholder="我们将根据您的建议优化文档" rows="3"></textarea>
+                    <div class="feedback_xp_des">您是否愿意我们后续联系您解决问题，并根据建议优化文档</div>
+                    <div class="feedback_xp_ctrl">
+                        <button class="ctrl_submit_bee" id="ctrl_submit_bee">仅评价</button>
+                        <button class="ctrl_submit_xp" id="ctrl_submit_xp">提交</button>
+                    </div>
+                </div>
+                <div class="star_feedback" id="feedback_good">
+                    <div class="star_title">这篇文档哪些方面做得好?</div>
+                    <ul class="feedback_list">
+                        <li class="a_feedback_list" value="6">内容简单易懂</li>
+                        <li class="a_feedback_list" value="7">图片示例清晰</li>
+                        <li class="a_feedback_list" value="9">阅读体验舒适</li>
+                        <li class="a_feedback_list" value="10">其他</li>
+                    </ul>
+                    <div class="star_title">更多建议反馈</div>
+                    <textarea class="feedback_text" placeholder="我们会持续努力，为您带来更好的体验" rows="3"></textarea>
+                    <div class="feedback_xp_ctrl">
+                        <button class="ctrl_cancel" id="ctrl_cancel">取消</button>
+                        <button class="ctrl_submit" id="ctrl_submit">提交</button>
+                    </div>
+                </div>
+                <div id="create-ticket">
+                    <span>功能咨询请单击</span>
+                    <a href="#" onclick="window.location.href = 'feedback.html';">创建工单</a>
+                </div>
+            </div>
+
+
+            <h3>本页目录</h3>
+            <ul id="aContent">
+                <!-- <li><a href="#introduction1">概述1</a></li>
+                <li><a href="#introduction2">概述2</a></li> -->
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    <!-- 页脚 -->
+    <div id="footer">
+        <div id="footer-left">
+            <ul>
+                <li style="border-right: 1px solid rgb(255, 255, 255); padding-left: 0;"><a href="index.html"
+                        id="homeBtn">首页</a></li>
+                <li style="border-right: 1px solid rgb(255, 255, 255);"><a href="help.html" id="helpBtn">帮助</a></li>
+                <li style="border-right: 1px solid rgb(255, 255, 255);"><a href="feedback.html"
+                        id="feedbackBtn">意见反馈</a></li>
+                <li><a href="hubuCartographicGroup.html" id="aboutusBtn">关于我们</a></li>
+            </ul>
+            <div>
+                <span>Copyright © 2024 地名标签云 hubutagcloud.cn All Rights Reserved. 备案号:</span>
+                <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2024043287号-1</a>
+            </div>
+            <div>建议您使用Edge、Chrome 80+、FireFox 86+等主流浏览器浏览本网站</div>
+        </div>
+        <div id="footer-right">
+            <div>
+                <span>首页二维码</span>
+                <img src="../img/QRcode.png" alt="">
+            </div>
+            <div>
+                <span>客服微信号</span>
+                <img src="../img/vx.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        initHelp();
+
+    </script>
+</body>
+
+</html>
